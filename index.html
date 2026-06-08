@@ -187,7 +187,7 @@ tr.hl2{background:rgba(167,139,250,.04)} tr.hl2 td{border-color:rgba(167,139,250
       <div class="ans-q">P5 — O TICKET COMPENSOU O FRETE?</div>
       <div class="ans-v warn">Não ainda</div>
       <div class="ans-note">
-        O ganho de ticket (+R$22,91) gerou mais GMV mas não reduziu o custo absoluto de frete. Para compensar, o threshold precisa ser elevado. <strong>Com o Cenário C (R$249/R$349), o custo líquido cairia de R$408k para R$155k/mês.</strong>
+        O ganho de ticket (+R$22,91) gerou mais GMV mas não reduziu o custo absoluto. Para compensar, o threshold precisa ser elevado. <strong>Com o Cenário C (PAC≥R$249 / SEDEX≥R$349), o custo líquido cai de R$456k para R$155k/mês.</strong> Com C+Regional (NE/Norte diferenciados), cai para R$139k. Ver tabela de cenários abaixo.
       </div>
     </div>
 
@@ -332,7 +332,40 @@ tr.hl2{background:rgba(167,139,250,.04)} tr.hl2 td{border-color:rgba(167,139,250
 <div class="sec">
   <div class="sl">Simulações</div>
   <h2>Cenários de Política de Frete — Base Real de Maio</h2>
-  <p style="color:var(--tx2);font-size:13px;margin-bottom:20px">Metodologia: pedidos abaixo do threshold → cobrar custo médio real (PAC=R$34,04 / SEDEX=R$42,21). Pedidos acima → frete grátis mantido. Resultado = frete_cobrado − custo_correios.</p>
+  <p style="color:var(--tx2);font-size:13px;margin-bottom:16px">Metodologia: pedidos abaixo do threshold → cobrar custo médio real (PAC=R$34,04 / SEDEX=R$42,21). Pedidos acima → frete grátis mantido. Resultado = frete_cobrado − custo_correios.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:20px">
+    <div style="background:var(--s2);border:1px solid var(--bdr);border-radius:8px;padding:13px 15px">
+      <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">CENÁRIO A</div>
+      <div style="font-size:13px;font-weight:700;color:var(--tx)">PAC ≥ R$199 · SEDEX ≥ R$250</div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:4px">Threshold conservador · +R$191k/mês</div>
+    </div>
+    <div style="background:var(--s2);border:1px solid var(--bdr);border-radius:8px;padding:13px 15px">
+      <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">CENÁRIO B</div>
+      <div style="font-size:13px;font-weight:700;color:var(--tx)">PAC ≥ R$229 · SEDEX ≥ R$299</div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:4px">Threshold intermediário · +R$226k/mês</div>
+    </div>
+    <div style="background:rgba(0,229,195,.06);border:1px solid rgba(0,229,195,.2);border-radius:8px;padding:13px 15px">
+      <div style="font-family:var(--m);font-size:9px;color:var(--acc2);letter-spacing:.1em;margin-bottom:6px">CENÁRIO C ★ RECOMENDADO</div>
+      <div style="font-size:13px;font-weight:700;color:var(--tx)">PAC ≥ R$249 · SEDEX ≥ R$349</div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:4px">Equilíbrio ótimo · +R$253k/mês · custo cai para R$155k</div>
+    </div>
+    <div style="background:rgba(0,229,195,.08);border:1px solid rgba(0,229,195,.3);border-radius:8px;padding:13px 15px">
+      <div style="font-family:var(--m);font-size:9px;color:var(--acc2);letter-spacing:.1em;margin-bottom:6px">CENÁRIO C + REGIONAL ★★ ÓTIMO</div>
+      <div style="font-size:13px;font-weight:700;color:var(--acc2)">C + NE R$299/R$399 · Norte R$349</div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:4px">C com regra NE/Norte · +R$268k/mês · custo cai para R$139k</div>
+    </div>
+    <div style="background:var(--s2);border:1px solid var(--bdr);border-radius:8px;padding:13px 15px">
+      <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">CENÁRIO D</div>
+      <div style="font-size:13px;font-weight:700;color:var(--tx)">PAC ≥ R$299 · SEDEX ≥ R$399</div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:4px">Agressivo · +R$286k/mês · risco de conversão*</div>
+    </div>
+    <div style="background:var(--s2);border:1px solid var(--bdr);border-radius:8px;padding:13px 15px">
+      <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">CENÁRIO D + REGIONAL</div>
+      <div style="font-size:13px;font-weight:700;color:var(--tx)">D + NE R$349/R$449 · Norte R$399</div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:4px">Máximo · +R$298k/mês · alto risco conversão*</div>
+    </div>
+  </div>
   <div class="tw">
     <table class="sct">
       <thead><tr><th>Cenário</th><th>PAC Grátis</th><th>SEDEX Grátis</th><th class="num">Resultado/mês</th><th class="num">Melhora/mês</th><th class="num">Melhora/ano</th><th class="num">%FG</th><th></th></tr></thead>
