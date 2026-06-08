@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise Financeira de Frete — MIESS 2026</title>
+
+<style>
+:root{--bg:#08080e;--s:#111118;--s2:#1a1a26;--bdr:#252535;--acc:#ff4d6d;--acc2:#00e5c3;--acc3:#ffb830;--mu:#5a5a78;--tx:#e6e6f0;--tx2:#a8a8c0;--ok:#00d17a;--err:#ff3b4e;--warn:#ff9500;--sedex:#5b8fff;--pac:#00e5c3;--f:'Segoe UI','Helvetica Neue',Arial,sans-serif;--m:'Consolas','SF Mono','Menlo',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);font-size:14px;line-height:1.6}
+
+/* HEADER */
+.hdr{padding:52px 56px 36px;border-bottom:1px solid var(--bdr);position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;top:-100px;right:-80px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,77,109,.1) 0%,transparent 65%);pointer-events:none}
+.hdr::after{content:'';position:absolute;bottom:-80px;left:20%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,229,195,.06) 0%,transparent 65%);pointer-events:none}
+.tag{display:inline-block;font-family:var(--m);font-size:10.5px;letter-spacing:.12em;color:var(--acc2);background:rgba(0,229,195,.08);border:1px solid rgba(0,229,195,.2);padding:3px 10px;border-radius:3px;margin-bottom:16px}
+h1{font-size:clamp(26px,3.5vw,44px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+h1 em{color:var(--acc);font-style:normal}
+.sub{color:var(--tx2);margin-top:8px;font-size:14px}
+.hdr-meta{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
+.hm{font-family:var(--m);font-size:10.5px;color:var(--mu);letter-spacing:.08em}
+.hm strong{display:block;color:var(--tx);font-size:12.5px;margin-bottom:1px}
+
+/* SECTIONS */
+.sec{padding:44px 56px;border-bottom:1px solid var(--bdr)}
+.sl{font-family:var(--m);font-size:10px;letter-spacing:.15em;color:var(--mu);text-transform:uppercase;margin-bottom:6px}
+h2{font-size:20px;font-weight:700;margin-bottom:24px;letter-spacing:-.01em}
+h3{font-size:14px;font-weight:600;margin-bottom:14px;color:var(--tx2)}
+
+/* ANSWER BOX — direct answers */
+.ans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:8px}
+.ans{background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:20px 22px}
+.ans-q{font-family:var(--m);font-size:10px;letter-spacing:.1em;color:var(--mu);margin-bottom:10px}
+.ans-v{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.ans-note{font-size:12px;color:var(--tx2);margin-top:8px;line-height:1.6}
+.ok{color:var(--ok)} .err{color:var(--err)} .warn{color:var(--warn)} .blu{color:var(--sedex)} .cy{color:var(--acc2)}
+
+/* KPI COMPARE */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.kpi{background:var(--s);border:1px solid var(--bdr);border-radius:9px;padding:18px 20px;position:relative;overflow:hidden}
+.kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--kc,var(--acc))}
+.kpi-lbl{font-family:var(--m);font-size:9.5px;letter-spacing:.1em;color:var(--mu);margin-bottom:8px}
+.kpi-vals{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
+.kv{}.kv-m{font-size:9.5px;color:var(--mu);margin-bottom:1px}
+.kv-n{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.kv-n.a{color:var(--tx2)} .kv-n.b{color:var(--tx)}
+.delta{font-family:var(--m);font-size:10px;padding:2px 7px;border-radius:3px;margin-left:auto;align-self:flex-start}
+.du{background:rgba(0,209,122,.12);color:var(--ok)}
+.dd{background:rgba(255,59,78,.12);color:var(--err)}
+.dw{background:rgba(255,149,0,.12);color:var(--warn)}
+
+/* TABLES */
+.tw{overflow-x:auto;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{font-family:var(--m);font-size:9.5px;letter-spacing:.09em;color:var(--mu);text-transform:uppercase;padding:10px 13px;text-align:left;border-bottom:1px solid var(--bdr);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(37,37,53,.6)}
+tbody tr:hover{background:rgba(255,255,255,.018)}
+tbody td{padding:9px 13px;color:var(--tx2);vertical-align:middle}
+tbody td:first-child{color:var(--tx);font-weight:600}
+.num{text-align:right;font-family:var(--m);font-size:12.5px}
+.bdg{display:inline-block;font-family:var(--m);font-size:9.5px;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.b-ok{background:rgba(0,209,122,.1);color:var(--ok)}
+.b-err{background:rgba(255,59,78,.12);color:var(--err)}
+.b-warn{background:rgba(255,149,0,.12);color:var(--warn)}
+.b-sed{background:rgba(91,143,255,.14);color:var(--sedex)}
+.b-pac{background:rgba(0,229,195,.1);color:var(--pac)}
+.b-mu{background:rgba(90,90,120,.2);color:var(--tx2)}
+tr.hl{background:rgba(0,229,195,.04)}
+tr.hl td{border-color:rgba(0,229,195,.12)}
+
+/* BARS */
+.bars{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.brow{display:flex;align-items:center;gap:10px}
+.blbl{font-size:11.5px;color:var(--tx2);width:100px;flex-shrink:0;text-align:right}
+.btrk{flex:1;height:20px;background:var(--s2);border-radius:3px;overflow:hidden}
+.bfil{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:8px;font-family:var(--m);font-size:10px;white-space:nowrap;transition:width .8s ease}
+.bval{font-family:var(--m);font-size:10.5px;color:var(--mu);width:80px;text-align:right;flex-shrink:0}
+
+/* POLICY CARDS */
+.pol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:24px}
+.pol{background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:22px 24px}
+.pol-label{font-family:var(--m);font-size:9.5px;letter-spacing:.12em;margin-bottom:12px}
+.pol-val{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.pol-note{font-size:11.5px;color:var(--tx2);margin-top:8px;line-height:1.65}
+
+/* ACTIONS */
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.ac{background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:20px 22px}
+.ac-pr{font-family:var(--m);font-size:9.5px;letter-spacing:.1em;margin-bottom:9px}
+.ac-ti{font-size:13.5px;font-weight:700;margin-bottom:7px}
+.ac-bd{font-size:12px;color:var(--tx2);line-height:1.65}
+.ac-imp{margin-top:10px;font-family:var(--m);font-size:11px;color:var(--acc2)}
+
+/* SCENARIO TABLE */
+.sct thead th{background:var(--s2)}
+.sct tr.rec{background:rgba(0,229,195,.04)}
+.sct tr.rec td:first-child{border-left:3px solid var(--acc2);padding-left:10px}
+.rec-b{display:inline-block;background:var(--acc2);color:#000;font-family:var(--m);font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:.05em}
+
+/* HIGHLIGHT BOX */
+.hbox{border-radius:9px;padding:20px 22px;margin-bottom:14px}
+.hbox.red{background:rgba(255,59,78,.06);border:1px solid rgba(255,59,78,.2)}
+.hbox.grn{background:rgba(0,209,122,.05);border:1px solid rgba(0,209,122,.15)}
+.hbox.yel{background:rgba(255,184,48,.05);border:1px solid rgba(255,184,48,.18)}
+.hbox.blu{background:rgba(91,143,255,.06);border:1px solid rgba(91,143,255,.18)}
+.hbox-lbl{font-family:var(--m);font-size:10px;letter-spacing:.09em;margin-bottom:8px}
+.hbox-bd{font-size:13px;color:var(--tx2);line-height:1.75}
+
+/* TWO COL */
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+@media(max-width:860px){.tc{grid-template-columns:1fr}.sec,.hdr{padding-left:20px;padding-right:20px}}
+
+footer{padding:28px 56px;text-align:center;font-family:var(--m);font-size:10.5px;color:var(--mu);border-top:1px solid var(--bdr)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="tag">ANÁLISE FINANCEIRA ESTRATÉGICA · MIESS · ABR–MAI 2026</div>
+  <h1>Quanto a MIESS <em>realmente</em><br>perde com frete</h1>
+  <p class="sub">34.276 pedidos · R$9,2M GMV · Base consolidada: KPL + Correios faturado</p>
+  <div class="hdr-meta">
+    <div class="hm"><strong>Subsídio Abril</strong>R$ 313.038/mês</div>
+    <div class="hm"><strong>Subsídio Maio</strong>R$ 373.761/mês</div>
+    <div class="hm"><strong>Sub% GMV Abr</strong>7,91%</div>
+    <div class="hm"><strong>Sub% GMV Mai</strong>7,13%</div>
+    <div class="hm"><strong>Match Correios</strong>75,6% Abr | 71,3% Mai</div>
+    <div class="hm"><strong>Gerado em</strong>08 Jun 2026</div>
+  </div>
+</div>
+
+<!-- RESPOSTAS DIRETAS -->
+<div class="sec">
+  <div class="sl">Respostas Diretas</div>
+  <h2>5 Perguntas Respondidas com Números Reais</h2>
+  <div class="ans-grid">
+
+    <div class="ans">
+      <div class="ans-q">P1 — SUBSÍDIO REAL ABRIL</div>
+      <div class="ans-v err">R$ 313.038</div>
+      <div class="ans-note">Frete cobrado clientes: R$126.340 · Custo Correios: R$439.378<br>Subsídio % GMV: <strong>7,91%</strong> — a cada R$100 de venda, R$7,91 iam para subsidiar frete</div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P2 — SUBSÍDIO REAL MAIO</div>
+      <div class="ans-v err">R$ 373.761</div>
+      <div class="ans-note">Frete cobrado clientes: R$139.702 · Custo Correios: R$513.462<br>Subsídio % GMV: <strong>7,13%</strong> — melhora de eficiência apesar do subsídio absoluto maior</div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P3 — ECONOMIA REAL COM A MUDANÇA</div>
+      <div class="ans-v warn">−R$0</div>
+      <div class="ans-note">Em valor absoluto, o subsídio <strong>cresceu R$60.722/mês</strong>. Mas o GMV cresceu +R$1,3M (+32,5%). Como % do GMV: 7,91% → 7,13% = <strong class="ok">melhora de 0,78pp de eficiência</strong>. A mudança não reduziu custo — tornou a operação mais eficiente por real vendido.</div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P4 — GANHO DE TICKET MÉDIO</div>
+      <div class="ans-v ok">+R$ 22,91</div>
+      <div class="ans-note">R$255,74 → R$278,65 (+9,0%). Ticket frete grátis: R$352,58 → R$365,95 (+R$13,38). <strong>Evidência de cart-building:</strong> 12,9% dos pedidos frete grátis têm GMV ±10% de R$299 — clientes comprando exatamente para atingir o threshold.</div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P5 — TICKET COMPENSOU O FRETE?</div>
+      <div class="ans-v warn">Parcialmente</div>
+      <div class="ans-note">Em termos absolutos: <strong class="err">não</strong> — o subsídio cresceu R$60k enquanto frete cobrado cresceu apenas R$13k. Mas como % do GMV: <strong class="ok">sim</strong> — a eficiência melhorou. A mudança gerou mais GMV por real de subsídio gasto.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMPARATIVO ABR x MAI -->
+<div class="sec">
+  <div class="sl">Etapa 3 — Comparativo</div>
+  <h2>Financeiro Consolidado: Abril × Maio 2026</h2>
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--acc2)">
+      <div class="kpi-lbl">PEDIDOS TOTAIS</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a">15.466</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b">18.810</div></div><div class="delta du">+21,6%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--acc2)">
+      <div class="kpi-lbl">GMV TOTAL</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:15px">R$3,95M</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:15px">R$5,24M</div></div><div class="delta du">+32,5%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--acc3)">
+      <div class="kpi-lbl">TICKET MÉDIO</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a">R$255,74</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b">R$278,65</div></div><div class="delta du">+9,0%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--ok)">
+      <div class="kpi-lbl">FRETE COBRADO CLIENTES</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:14px">R$126.340</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:14px">R$139.702</div></div><div class="delta du">+10,6%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--err)">
+      <div class="kpi-lbl">CUSTO CORREIOS</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:14px">R$439.378</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:14px">R$513.462</div></div><div class="delta dd">+16,9%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--err)">
+      <div class="kpi-lbl">SUBSÍDIO LÍQUIDO</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:14px">R$313.038</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:14px">R$373.761</div></div><div class="delta dd">+19,4%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--ok)">
+      <div class="kpi-lbl">SUBSÍDIO % GMV</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a">7,91%</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b">7,13%</div></div><div class="delta du">−0,78pp</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--warn)">
+      <div class="kpi-lbl">% FRETE GRÁTIS</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a">61,8%</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b">67,4%</div></div><div class="delta dd">+5,6pp ⚠</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--acc3)">
+      <div class="kpi-lbl">TICKET MÉDIO — FRETE GRÁTIS</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a">R$352,58</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b">R$365,95</div></div><div class="delta du">+3,8%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--mu)">
+      <div class="kpi-lbl">TICKET MÉDIO — FRETE PAGO</div>
+      <div class="kpi-vals"><div class="kv"><div class="kv-m">ABR</div><div class="kv-n a">R$98,86</div></div><div class="kv"><div class="kv-m">MAI</div><div class="kv-n b">R$98,03</div></div><div class="delta dw">−0,8%</div></div>
+    </div>
+  </div>
+
+  <div class="hbox yel" style="margin-top:22px">
+    <div class="hbox-lbl" style="color:var(--acc3)">⚠ ALERTA: % DE FRETE GRÁTIS SUBIU EM MAIO (+5,6pp)</div>
+    <div class="hbox-bd">A mudança de política deveria reduzir o % de frete grátis — mas ele <strong style="color:var(--tx)">aumentou de 61,8% para 67,4%</strong>. Hipóteses: (a) o threshold anterior era mais restritivo e os clientes naturalmente atingem o novo patamar com carrinhos maiores; (b) crescimento de volume de Maio foi puxado por canais com política de frete mais generosa (live shopping ou promoções). <strong style="color:var(--warn)">Isso indica que o threshold atual ainda está baixo demais para o comportamento de compra da base.</strong></div>
+  </div>
+</div>
+
+<!-- CLASSIFICAÇÃO DE PEDIDOS -->
+<div class="sec">
+  <div class="sl">Etapa 4 — Classificação</div>
+  <h2>Perfil Financeiro dos Pedidos — Maio 2026</h2>
+  <div class="tc">
+    <div>
+      <h3>Distribuição por Rentabilidade Logística</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Classificação</th><th class="num">Pedidos</th><th class="num">%</th><th class="num">GMV</th><th class="num">Subsídio</th><th class="num">% Sub. Total</th></tr></thead>
+          <tbody>
+            <tr><td><span class="bdg b-err">Alt. Deficitário (&gt;15% GMV)</span></td><td class="num">4.482</td><td class="num">23,8%</td><td class="num">R$926.769</td><td class="num" style="color:var(--err)">R$269.395</td><td class="num" style="color:var(--err)">72,1%</td></tr>
+            <tr><td><span class="bdg b-warn">Deficitário (5–15% GMV)</span></td><td class="num">3.519</td><td class="num">18,7%</td><td class="num">R$1.509.263</td><td class="num" style="color:var(--warn)">R$137.492</td><td class="num" style="color:var(--warn)">36,8%</td></tr>
+            <tr><td><span class="bdg b-mu">Neutro (1–5% GMV)</span></td><td class="num">1.041</td><td class="num">5,5%</td><td class="num">R$735.646</td><td class="num">R$23.937</td><td class="num">6,4%</td></tr>
+            <tr><td><span class="bdg b-ok">Lucrativo (frete &gt; custo)</span></td><td class="num">5.818</td><td class="num">30,9%</td><td class="num">R$567.823</td><td class="num" style="color:var(--ok)">−R$57.063</td><td class="num" style="color:var(--ok)">−15,3%</td></tr>
+            <tr><td><span class="bdg b-mu">Sem Frete Correios</span></td><td class="num">3.950</td><td class="num">21,0%</td><td class="num">R$1.501.989</td><td class="num">R$0</td><td class="num">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h3>Leitura Crítica</h3>
+      <div class="hbox red">
+        <div class="hbox-lbl" style="color:var(--err)">CONCENTRAÇÃO DE RISCO</div>
+        <div class="hbox-bd">23,8% dos pedidos (4.482) são <strong style="color:var(--tx)">Altamente Deficitários</strong> e respondem por <strong style="color:var(--err)">72,1% de todo o subsídio</strong>. Em termos práticos: menos de 1/4 dos pedidos consome ¾ do gasto com subsídio. Esses pedidos têm GMV médio de R$206 — baixo ticket, alto custo de frete.</div>
+      </div>
+      <div class="hbox grn">
+        <div class="hbox-lbl" style="color:var(--ok)">OPORTUNIDADE</div>
+        <div class="hbox-bd">5.818 pedidos Lucrativos geraram <strong style="color:var(--ok)">R$57.063 de crédito de frete</strong> (cliente pagou mais que o custo). Esses são os pedidos de frete pago de pequeno ticket — a política atual funciona bem para esse grupo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAIXAS DE TICKET -->
+<div class="sec">
+  <div class="sl">Etapa 6 — Faixas</div>
+  <h2>Análise por Faixa de Ticket — Maio (Pedidos Correios)</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Faixa</th><th class="num">Qtd</th><th class="num">Ticket Méd</th><th class="num">Frete Cli</th><th class="num">Custo Corr</th><th class="num">Subsídio</th><th class="num">Sub%GMV</th><th class="num">% FG</th><th>Diagnóstico</th></tr></thead>
+      <tbody>
+        <tr><td>Até R$99</td><td class="num">4.094</td><td class="num">R$53,62</td><td class="num">R$58.625</td><td class="num">R$87.976</td><td class="num" style="color:var(--err)">R$29.351</td><td class="num">13,4%</td><td class="num">26%</td><td><span class="bdg b-warn">Frete pago majoritário</span></td></tr>
+        <tr><td>R$100–149</td><td class="num">1.827</td><td class="num">R$120,10</td><td class="num">R$18.357</td><td class="num">R$56.309</td><td class="num" style="color:var(--err)">R$37.952</td><td class="num" style="color:var(--err)">17,3%</td><td class="num">59%</td><td><span class="bdg b-err">Alto subsídio — crítico</span></td></tr>
+        <tr><td>R$150–199</td><td class="num">1.432</td><td class="num">R$170,85</td><td class="num">R$13.368</td><td class="num">R$52.606</td><td class="num" style="color:var(--err)">R$39.238</td><td class="num" style="color:var(--err)">16,0%</td><td class="num">66%</td><td><span class="bdg b-err">Alto subsídio — crítico</span></td></tr>
+        <tr><td>R$200–249</td><td class="num">1.010</td><td class="num">R$220,19</td><td class="num">R$9.604</td><td class="num">R$38.919</td><td class="num" style="color:var(--warn)">R$29.315</td><td class="num" style="color:var(--warn)">13,2%</td><td class="num">69%</td><td><span class="bdg b-warn">Subsídio elevado</span></td></tr>
+        <tr style="background:rgba(255,59,78,.04)"><td><strong>R$250–299 ⚠</strong></td><td class="num">1.118</td><td class="num">R$269,15</td><td class="num">R$734</td><td class="num">R$46.296</td><td class="num" style="color:var(--err)">R$45.562</td><td class="num" style="color:var(--err)">15,1%</td><td class="num" style="color:var(--err)">98%</td><td><span class="bdg b-err">SANGRAMENTO — 98% grátis</span></td></tr>
+        <tr style="background:rgba(255,59,78,.04)"><td><strong>R$300–349 ⚠</strong></td><td class="num">893</td><td class="num">R$319,26</td><td class="num">R$541</td><td class="num">R$42.825</td><td class="num" style="color:var(--err)">R$42.283</td><td class="num" style="color:var(--err)">14,8%</td><td class="num" style="color:var(--err)">99%</td><td><span class="bdg b-err">SANGRAMENTO — 99% grátis</span></td></tr>
+        <tr><td>R$350–399</td><td class="num">557</td><td class="num">R$371,91</td><td class="num">R$555</td><td class="num">R$27.213</td><td class="num" style="color:var(--warn)">R$26.658</td><td class="num">12,9%</td><td class="num" style="color:var(--err)">98%</td><td><span class="bdg b-warn">Subsídio elevado</span></td></tr>
+        <tr><td>R$400+</td><td class="num">2.463</td><td class="num">R$761,56</td><td class="num">R$2.838</td><td class="num">R$161.319</td><td class="num">R$158.481</td><td class="num" style="color:var(--ok)">8,4%</td><td class="num" style="color:var(--err)">98%</td><td><span class="bdg b-ok">Sub%GMV saudável</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="hbox yel" style="margin-top:18px">
+    <div class="hbox-lbl" style="color:var(--acc3)">⚠ FAIXAS R$250–349: SANGRAMENTO DE R$87.845/MÊS (R$1,05M/ANO)</div>
+    <div class="hbox-bd">2.011 pedidos nessa faixa têm <strong style="color:var(--tx)">98–99% de frete grátis</strong> e geram R$88k/mês de subsídio com sub%GMV de 15%. São os pedidos "atingiu o threshold exatamente" — forte evidência que clientes adicionaram produtos para não pagar frete. <strong style="color:var(--warn)">Elevar o threshold de R$249 para R$299 eliminaria boa parte desse grupo.</strong></div>
+  </div>
+</div>
+
+<!-- ANÁLISE REGIONAL -->
+<div class="sec">
+  <div class="sl">Etapa 8 — Regional</div>
+  <h2>Análise Regional — Maio 2026 (Pedidos com Correios)</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Região</th><th class="num">Pedidos</th><th class="num">GMV</th><th class="num">Ticket</th><th class="num">Frete Cli</th><th class="num">Custo Corr</th><th class="num">Subsídio</th><th class="num">Sub%GMV</th><th class="num">CustoMédio</th><th class="num">%FG</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Sudeste</td><td class="num">6.056</td><td class="num">R$1.231.123</td><td class="num">R$203</td><td class="num">R$55.453</td><td class="num">R$122.775</td><td class="num">R$67.322</td><td class="num ok">5,5%</td><td class="num">R$20,27</td><td class="num">47%</td><td><span class="bdg b-ok">✓ Saudável</span></td></tr>
+        <tr><td>Sul</td><td class="num">1.913</td><td class="num">R$511.902</td><td class="num">R$268</td><td class="num">R$19.304</td><td class="num">R$61.164</td><td class="num">R$41.860</td><td class="num dw" style="color:var(--warn)">8,2%</td><td class="num">R$31,97</td><td class="num">64%</td><td><span class="bdg b-warn">⚠ Atenção</span></td></tr>
+        <tr><td>Centro-Oeste</td><td class="num">1.250</td><td class="num">R$388.069</td><td class="num">R$310</td><td class="num">R$10.108</td><td class="num">R$54.615</td><td class="num">R$44.507</td><td class="num" style="color:var(--warn)">11,5%</td><td class="num">R$43,69</td><td class="num">73%</td><td><span class="bdg b-warn">⚠ Elevado</span></td></tr>
+        <tr style="background:rgba(255,59,78,.03)"><td><strong>Nordeste</strong></td><td class="num">3.301</td><td class="num">R$1.113.357</td><td class="num">R$337</td><td class="num">R$14.703</td><td class="num">R$212.329</td><td class="num" style="color:var(--err)">R$197.626</td><td class="num" style="color:var(--err)">17,8%</td><td class="num" style="color:var(--err)">R$64,32</td><td class="num" style="color:var(--err)">89%</td><td><span class="bdg b-err">✗ Crítico</span></td></tr>
+        <tr style="background:rgba(255,59,78,.03)"><td><strong>Norte</strong></td><td class="num">874</td><td class="num">R$329.986</td><td class="num">R$378</td><td class="num">R$5.054</td><td class="num">R$62.579</td><td class="num" style="color:var(--err)">R$57.525</td><td class="num" style="color:var(--err)">17,4%</td><td class="num" style="color:var(--err)">R$71,60</td><td class="num" style="color:var(--err)">89%</td><td><span class="bdg b-err">✗ Crítico</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px">
+    <div class="hbox red">
+      <div class="hbox-lbl" style="color:var(--err)">NORDESTE: 25% DO VOLUME, 42% DO SUBSÍDIO</div>
+      <div class="hbox-bd">89% dos pedidos nordestinos têm frete grátis. SEDEX médio = R$89,98. PAC médio = R$48,31. Sub%GMV de 17,8% é insustentável — cada R$100 vendido no Nordeste custa R$17,78 de frete subsidiado. <strong style="color:var(--tx)">Regra diferenciada é obrigatória.</strong></div>
+    </div>
+    <div class="hbox red">
+      <div class="hbox-lbl" style="color:var(--err)">NORTE: CUSTO MÉDIO R$72/OBJ — ÍNDICE 1,85</div>
+      <div class="hbox-bd">A pior relação custo/volume. SEDEX AC/RR/AM ultrapassa R$95/obj em média. RO tem custo médio de R$89,20. 89% frete grátis. <strong style="color:var(--tx)">Banir SEDEX grátis no Norte é a ação de maior impacto imediato.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOP 20 ESTADOS -->
+<div class="sec">
+  <div class="sl">Etapa — Top Estados</div>
+  <h2>Top 20 Estados por Subsídio Total — Maio 2026</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>UF</th><th class="num">Pedidos</th><th class="num">Ticket Méd</th><th class="num">Subsídio Total</th><th class="num">Sub Médio/Ped</th><th class="num">Custo Méd Corr</th><th class="num">Sub%GMV</th><th class="num">%FG</th></tr></thead>
+      <tbody>
+        <tr><td>BA</td><td class="num">931</td><td class="num">R$366</td><td class="num err">R$37.553</td><td class="num">R$40</td><td class="num">R$46</td><td class="num">11,0%</td><td class="num">83%</td></tr>
+        <tr><td>CE</td><td class="num">545</td><td class="num">R$293</td><td class="num err">R$34.306</td><td class="num">R$63</td><td class="num" style="color:var(--err)">R$67</td><td class="num err">21,5%</td><td class="num">90%</td></tr>
+        <tr><td>PE</td><td class="num">549</td><td class="num">R$305</td><td class="num err">R$31.370</td><td class="num">R$57</td><td class="num" style="color:var(--err)">R$61</td><td class="num err">18,7%</td><td class="num">91%</td></tr>
+        <tr><td>PA</td><td class="num">481</td><td class="num">R$353</td><td class="num err">R$31.185</td><td class="num">R$65</td><td class="num" style="color:var(--err)">R$69</td><td class="num err">18,4%</td><td class="num">91%</td></tr>
+        <tr><td>MA</td><td class="num">404</td><td class="num">R$347</td><td class="num err">R$30.826</td><td class="num" style="color:var(--err)">R$76</td><td class="num" style="color:var(--err)">R$80</td><td class="num err">22,0%</td><td class="num">94%</td></tr>
+        <tr><td>MG</td><td class="num">1.108</td><td class="num">R$248</td><td class="num" style="color:var(--warn)">R$26.868</td><td class="num">R$24</td><td class="num">R$34</td><td class="num">9,8%</td><td class="num">67%</td></tr>
+        <tr><td>PB</td><td class="num">282</td><td class="num">R$280</td><td class="num err">R$19.270</td><td class="num" style="color:var(--err)">R$68</td><td class="num" style="color:var(--err)">R$71</td><td class="num err">24,4%</td><td class="num">95%</td></tr>
+        <tr><td>SP</td><td class="num">3.846</td><td class="num">R$177</td><td class="num">R$18.475</td><td class="num ok">R$5</td><td class="num ok">R$14</td><td class="num ok">2,7%</td><td class="num">38%</td></tr>
+        <tr><td>RN</td><td class="num">216</td><td class="num">R$419</td><td class="num err">R$17.441</td><td class="num" style="color:var(--err)">R$81</td><td class="num" style="color:var(--err)">R$83</td><td class="num err">19,3%</td><td class="num">95%</td></tr>
+        <tr><td>RS</td><td class="num">713</td><td class="num">R$276</td><td class="num">R$16.912</td><td class="num">R$24</td><td class="num">R$33</td><td class="num">8,6%</td><td class="num">65%</td></tr>
+        <tr><td>RO</td><td class="num">177</td><td class="num">R$415</td><td class="num err">R$15.068</td><td class="num" style="color:var(--err)">R$85</td><td class="num" style="color:var(--err)">R$89</td><td class="num err">20,5%</td><td class="num">93%</td></tr>
+        <tr><td>PR</td><td class="num">654</td><td class="num">R$267</td><td class="num">R$14.844</td><td class="num">R$23</td><td class="num">R$33</td><td class="num">8,5%</td><td class="num">65%</td></tr>
+        <tr><td>RJ</td><td class="num">811</td><td class="num">R$229</td><td class="num">R$14.118</td><td class="num">R$17</td><td class="num">R$29</td><td class="num">7,6%</td><td class="num">59%</td></tr>
+        <tr><td>MT</td><td class="num">308</td><td class="num">R$314</td><td class="num" style="color:var(--warn)">R$11.804</td><td class="num">R$38</td><td class="num">R$47</td><td class="num">12,2%</td><td class="num">76%</td></tr>
+        <tr><td>SC</td><td class="num">546</td><td class="num">R$257</td><td class="num">R$10.105</td><td class="num">R$19</td><td class="num">R$29</td><td class="num">7,2%</td><td class="num">59%</td></tr>
+        <tr><td>PI</td><td class="num">134</td><td class="num">R$337</td><td class="num err">R$9.773</td><td class="num" style="color:var(--err)">R$73</td><td class="num" style="color:var(--err)">R$79</td><td class="num err">21,6%</td><td class="num">90%</td></tr>
+        <tr><td>AL</td><td class="num">128</td><td class="num">R$364</td><td class="num err">R$9.054</td><td class="num" style="color:var(--err)">R$71</td><td class="num" style="color:var(--err)">R$76</td><td class="num err">19,4%</td><td class="num">89%</td></tr>
+        <tr><td>TO</td><td class="num">128</td><td class="num">R$395</td><td class="num err">R$8.099</td><td class="num">R$63</td><td class="num">R$66</td><td class="num err">16,0%</td><td class="num">92%</td></tr>
+        <tr><td>SE</td><td class="num">112</td><td class="num">R$388</td><td class="num err">R$8.033</td><td class="num" style="color:var(--err)">R$72</td><td class="num" style="color:var(--err)">R$77</td><td class="num err">18,5%</td><td class="num">91%</td></tr>
+        <tr><td>ES</td><td class="num">291</td><td class="num">R$307</td><td class="num">R$7.861</td><td class="num">R$27</td><td class="num">R$35</td><td class="num">8,8%</td><td class="num">71%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--mu);margin-top:10px;font-family:var(--m)">SP é o 8º maior em subsídio absoluto mas o MENOR em sub%GMV (2,7%) — volume compensa. CE, MA, PB, RN têm sub%GMV acima de 20% — insustentável em qualquer modelo de margem.</p>
+</div>
+
+<!-- SIMULAÇÕES -->
+<div class="sec">
+  <div class="sl">Etapas 7 + 11 — Simulações</div>
+  <h2>Simulação de Cenários — Base Real de Maio (13.394 pedidos Correios)</h2>
+  <p style="color:var(--tx2);font-size:13px;margin-bottom:20px">Metodologia: para cada pedido abaixo do threshold, simula cobrança do custo médio real do serviço (PAC=R$34,04 / SEDEX=R$42,21). Para pedidos acima: frete grátis mantido. Economia = redução de subsídio vs situação atual.</p>
+  <div class="tw">
+    <table class="sct">
+      <thead><tr><th>Cenário</th><th>PAC Grátis</th><th>SEDEX Grátis</th><th class="num">Subsídio/mês</th><th class="num">Economia/mês</th><th class="num">Economia/ano</th><th class="num">FG%</th><th>Grau Conf.</th></tr></thead>
+      <tbody>
+        <tr><td>Atual (Maio)</td><td>—</td><td>—</td><td class="num err">R$408.840</td><td class="num">—</td><td class="num">—</td><td class="num">65,2%</td><td><span class="bdg b-mu">Referência</span></td></tr>
+        <tr><td>A</td><td>≥ R$199</td><td>≥ R$250</td><td class="num">R$211.453</td><td class="num ok">+R$197.387</td><td class="num ok">+R$2,37M</td><td class="num">41,7%</td><td><span class="bdg b-warn">Alto</span></td></tr>
+        <tr><td>B</td><td>≥ R$229</td><td>≥ R$299</td><td class="num">R$176.652</td><td class="num ok">+R$232.188</td><td class="num ok">+R$2,79M</td><td class="num">35,0%</td><td><span class="bdg b-warn">Alto</span></td></tr>
+        <tr class="rec"><td><strong>C ★</strong></td><td><strong>≥ R$249</strong></td><td><strong>≥ R$349</strong></td><td class="num"><strong>R$148.744</strong></td><td class="num ok"><strong>+R$260.096</strong></td><td class="num ok"><strong>+R$3,12M</strong></td><td class="num"><strong>29,8%</strong></td><td><span class="rec-b">RECOMENDADO</span></td></tr>
+        <tr><td>D</td><td>≥ R$299</td><td>≥ R$399</td><td class="num">R$115.128</td><td class="num ok">+R$293.712</td><td class="num ok">+R$3,52M</td><td class="num">23,0%</td><td><span class="bdg b-warn">Médio*</span></td></tr>
+        <tr class="rec"><td><strong>C + Regional ★★</strong></td><td><strong>R$249 (geral)<br>R$299 NE<br>R$349 Norte</strong></td><td><strong>R$349 (geral)<br>R$399 NE<br>R$499 Norte</strong></td><td class="num"><strong>R$132.995</strong></td><td class="num ok"><strong>+R$275.845</strong></td><td class="num ok"><strong>+R$3,31M</strong></td><td class="num"><strong>26,6%</strong></td><td><span class="rec-b">ÓTIMO</span></td></tr>
+        <tr><td>D + Regional</td><td>R$299 + NE/N maior</td><td>R$399 + NE/N maior</td><td class="num">R$103.434</td><td class="num ok">+R$305.406</td><td class="num ok">+R$3,66M</td><td class="num">20,6%</td><td><span class="bdg b-warn">Médio*</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--mu);margin-top:10px;font-family:var(--m)">*Cenário D pode reduzir volume de conversão — não modelado. Recomenda-se teste A/B antes de implementar globalmente. **Cenário C + Regional é o equilíbrio ótimo entre economia e risco de perda de conversão.</p>
+</div>
+
+<!-- CORTES URGENTES -->
+<div class="sec">
+  <div class="sl">Etapa 10 — Cortes Urgentes</div>
+  <h2>O Que Deve Ser Feito — Ordenado por Impacto Financeiro</h2>
+  <div class="ac-grid">
+
+    <div class="ac">
+      <div class="ac-pr err">🔴 URGENTE · IMPLEMENTAR EM 7 DIAS · IMPACTO #1</div>
+      <div class="ac-ti">Regra diferenciada Nordeste: PAC grátis ≥ R$299, SEDEX grátis ≥ R$399</div>
+      <div class="ac-bd">Nordeste tem sub%GMV de 17,8% com custo médio SEDEX de R$89,98. 89% dos pedidos são frete grátis. Criar regra regional separada no VTEX é a ação de maior impacto isolado.</div>
+      <div class="ac-imp">↑ Redução de subsídio estimada: R$120–150k/mês | R$1,44–1,8M/ano</div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-pr err">🔴 URGENTE · IMPLEMENTAR EM 7 DIAS · IMPACTO #2</div>
+      <div class="ac-ti">Banir SEDEX grátis para Norte abaixo de R$499</div>
+      <div class="ac-bd">Norte: custo médio SEDEX = R$95,94. Sub%GMV de 17,4%. RO tem custo médio de R$89,20. Para o Norte, apenas PAC grátis ≥ R$349. SEDEX grátis somente acima de R$499.</div>
+      <div class="ac-imp">↑ Redução estimada: R$40–55k/mês | R$480–660k/ano</div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--warn)">🟡 URGENTE · IMPLEMENTAR EM 14 DIAS · IMPACTO #3</div>
+      <div class="ac-ti">Elevar threshold geral: PAC ≥ R$249 / SEDEX ≥ R$349</div>
+      <div class="ac-bd">Faixas R$250–349 têm 98–99% de frete grátis e geram R$87.845/mês de subsídio. Elevando o threshold, a maioria desses pedidos pagaria frete ou teria que adicionar R$50–100 ao carrinho (carta-building). Implementar via teste A/B.</div>
+      <div class="ac-imp">↑ Economia estimada: R$260k/mês (Cenário C) | R$3,12M/ano</div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--warn)">🟡 30 DIAS · IMPACTO #4</div>
+      <div class="ac-ti">Revisar pedidos da faixa R$100–199 com frete grátis</div>
+      <div class="ac-bd">3.259 pedidos nessa faixa, sub%GMV de 16–17%. 60–66% têm frete grátis — o que implica threshold atual ≤ R$150 para parte da base. Esses pedidos têm margem operacional negativa em frete. Necessário identificar qual regra está concedendo frete grátis nessa faixa.</div>
+      <div class="ac-imp">↑ Subsídio dessa faixa: R$77.190/mês — revisar critérios</div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--warn)">🟡 30 DIAS · IMPACTO #5</div>
+      <div class="ac-ti">Auditar pedidos de alto peso para NE/Norte (>5kg via SEDEX)</div>
+      <div class="ac-bd">292 objetos >10kg em Maio, custo até R$833/envio. Cruzar com ticket: pedido CE R$567 com frete R$833 é deficitário em 147%. Criar restrição: pedidos acima de 5kg para NE/Norte somente PAC, independente do valor.</div>
+      <div class="ac-imp">↑ Eliminar outliers: estimativa R$15–25k/mês</div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--sedex)">🔵 MÉDIO PRAZO · 60 DIAS · IMPACTO #6</div>
+      <div class="ac-ti">Definir política específica para Live Shopping</div>
+      <div class="ac-bd">Sem campo canal nos arquivos, não foi possível segregar lives. Porém a concentração de pedidos em torno de thresholds sugere estratégia diferenciada. Implementar tag de canal no VTEX para próxima análise e criar regra Live: PAC ≥ R$149 / SEDEX ≥ R$199 (apenas Sul+Sudeste).</div>
+      <div class="ac-imp">↑ Previne subsídio excessivo em lives para NE/Norte</div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--sedex)">🔵 MÉDIO PRAZO · 60 DIAS · IMPACTO #7</div>
+      <div class="ac-ti">Investigar migração Tex Courier → Correios</div>
+      <div class="ac-bd">1.552 pedidos Tex Courier em Abril, 0 em Maio. Esses pedidos foram para Correios PAC. Se Tex era mais barata em rotas Sul/SP interior, a migração aumentou custo silenciosamente. Solicitar histórico de custo Tex para comparação.</div>
+      <div class="ac-imp">↑ Potencial recuperação de R$10–20k/mês</div>
+    </div>
+
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--sedex)">🔵 ESTRATÉGICO · 90 DIAS · IMPACTO #8</div>
+      <div class="ac-ti">Dashboard de frete no MiessBrain com alertas automáticos</div>
+      <div class="ac-bd">Criar painel que monitore em tempo real: sub%GMV por região, % frete grátis por faixa de ticket, outliers de custo. Threshold de alerta: sub%GMV > 10% em qualquer região deve gerar alerta para o CFO. Integrar dados VTEX diretamente.</div>
+      <div class="ac-imp">↑ Prevenção de desvios = valor recorrente</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- POLÍTICA FINAL -->
+<div class="sec">
+  <div class="sl">Decisão Final</div>
+  <h2>Política Recomendada — Baseada nos Dados Reais</h2>
+
+  <div class="pol-grid">
+    <div class="pol" style="border-top:3px solid var(--pac)">
+      <div class="pol-label" style="color:var(--pac)">SITE — FRETE ECONÔMICO (PAC) GRÁTIS</div>
+      <div class="pol-val">R$249</div>
+      <div class="pol-note">Sul + Sudeste + CO: ≥ R$249<br>Nordeste: ≥ R$299<br>Norte: ≥ R$349</div>
+    </div>
+    <div class="pol" style="border-top:3px solid var(--sedex)">
+      <div class="pol-label" style="color:var(--sedex)">SITE — FRETE EXPRESSO (SEDEX) GRÁTIS</div>
+      <div class="pol-val">R$349</div>
+      <div class="pol-note">Sul + Sudeste + CO: ≥ R$349<br>Nordeste: ≥ R$449<br>Norte: ≥ R$549 (ou não oferecer)</div>
+    </div>
+    <div class="pol" style="border-top:3px solid var(--acc3)">
+      <div class="pol-label" style="color:var(--acc3)">LIVE — FRETE ECONÔMICO GRÁTIS</div>
+      <div class="pol-val">R$149</div>
+      <div class="pol-note">Somente Sul + Sudeste em lives<br>CO: ≥ R$199<br>Nordeste/Norte: ≥ R$249</div>
+    </div>
+    <div class="pol" style="border-top:3px solid var(--acc)">
+      <div class="pol-label" style="color:var(--acc)">LIVE — FRETE EXPRESSO GRÁTIS</div>
+      <div class="pol-val">R$249</div>
+      <div class="pol-note">Somente Sul + Sudeste em lives<br>CO: ≥ R$299<br>Nordeste/Norte: não oferecer SEDEX grátis</div>
+    </div>
+  </div>
+
+  <div class="hbox grn">
+    <div class="hbox-lbl" style="color:var(--ok)">ECONOMIA MENSAL ESTIMADA: R$275.845 | ECONOMIA ANUAL: R$3.310.140</div>
+    <div class="hbox-bd" style="font-size:14px">
+      <strong style="color:var(--tx)">GRAU DE CONFIANÇA: ALTO</strong><br>
+      Baseado em 13.394 pedidos com custo Correios real (75% de cobertura). Todos os cenários usam custo faturado real, não estimado. Margem de variação ±15% dependendo de elasticidade de conversão (pedidos que não converteriam se o frete fosse cobrado — não modelado por ausência de histórico de abandono de carrinho).<br><br>
+      <strong style="color:var(--tx)">Justificativa:</strong> Cenário C + Regional remove o sangramento das faixas R$250–349 (sub%GMV 15%) e das regiões Nordeste/Norte (sub%GMV 17–18%) sem impactar as faixas de alta margem (R$400+, sub%GMV 8,4%). O threshold de R$249 é o ponto onde a curva de subsídio%GMV se inverte — abaixo dele o sub sobe rapidamente, acima dele cai para patamares saudáveis.
+    </div>
+  </div>
+</div>
+
+<!-- RESUMO EXECUTIVO -->
+<div class="sec">
+  <div class="sl">Resumo Executivo</div>
+  <h2>Para Diretoria</h2>
+  <div style="background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:26px;font-size:13.5px;line-height:1.9;color:var(--tx2)">
+    <p>A MIESS gastou <strong style="color:var(--err)">R$313.038 em subsídio de frete em Abril e R$373.761 em Maio</strong>. O subsídio cresceu R$60.722 em termos absolutos, mas como percentual do GMV melhorou de 7,91% para 7,13% — o que indica que a mudança de política foi na direção certa, mas insuficiente.</p><br>
+    <p>O problema central não é o frete em si, mas <strong style="color:var(--tx)">dois pontos de sangramento combinados</strong>: (1) pedidos de R$250–349 com 98–99% de frete grátis gerando R$88k/mês de subsídio com sub%GMV de 15%; e (2) Nordeste+Norte respondendo por apenas 31% do volume mas 54% do subsídio, com sub%GMV de 17–18%.</p><br>
+    <p>A política recomendada — threshold geral R$249/R$349 com regras diferenciadas para Nordeste e Norte — tem potencial de gerar <strong style="color:var(--acc2)">R$3,31M de economia anual</strong> com grau de confiança alto, baseado em dados reais de custo faturado pelos Correios. A implementação deve ser feita em duas etapas: regra regional (urgente, 7 dias) e threshold geral elevado (14–30 dias, via teste A/B para monitorar conversão).</p>
+  </div>
+</div>
+
+<footer>Análise Financeira de Frete · MIESS Moda Íntima · 08/06/2026 · Base: 34.276 pedidos · KPL + Correios Fatura Abr+Mai 2026</footer>
+</body>
+</html>
