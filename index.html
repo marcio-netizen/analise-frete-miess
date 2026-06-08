@@ -3,74 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Análise Financeira de Frete + Prime — MIESS 2026</title>
+<title>Análise Financeira de Frete — MIESS 2026</title>
 <style>
-:root{
-  --bg:#07070d;--s:#101018;--s2:#181824;--bdr:#222234;
-  --acc:#ff4d6d;--acc2:#00e5c3;--acc3:#ffb830;--acc4:#a78bfa;
-  --mu:#4e4e6a;--tx:#e4e4f0;--tx2:#a4a4c0;
-  --ok:#00d17a;--err:#ff3b4e;--warn:#ff9500;--sedex:#5b8fff;--pac:#00e5c3;
-  --f:'Segoe UI','Helvetica Neue',Arial,sans-serif;--m:'Consolas','SF Mono','Menlo',monospace
-}
+:root{--bg:#08080e;--s:#111118;--s2:#1a1a26;--bdr:#252535;--acc:#ff4d6d;--acc2:#00e5c3;--acc3:#ffb830;--mu:#5a5a78;--tx:#e6e6f0;--tx2:#a8a8c0;--ok:#00d17a;--err:#ff3b4e;--warn:#ff9500;--sedex:#5b8fff;--pac:#00e5c3;--f:'Segoe UI','Helvetica Neue',Arial,sans-serif;--m:'Consolas','SF Mono','Menlo',monospace}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--tx);font-family:var(--f);font-size:14px;line-height:1.6}
-
-/* HEADER */
 .hdr{padding:52px 56px 36px;border-bottom:1px solid var(--bdr);position:relative;overflow:hidden}
-.hdr::before{content:'';position:absolute;top:-120px;right:-100px;width:700px;height:700px;background:radial-gradient(circle,rgba(255,77,109,.09) 0%,transparent 65%);pointer-events:none}
-.hdr::after{content:'';position:absolute;bottom:-60px;left:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(167,139,250,.06) 0%,transparent 65%);pointer-events:none}
-.tag{display:inline-block;font-family:var(--m);font-size:10px;letter-spacing:.13em;color:var(--acc2);background:rgba(0,229,195,.07);border:1px solid rgba(0,229,195,.18);padding:3px 11px;border-radius:3px;margin-bottom:14px}
-h1{font-size:clamp(24px,3.2vw,42px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.hdr::before{content:'';position:absolute;top:-100px;right:-80px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,77,109,.1) 0%,transparent 65%);pointer-events:none}
+.tag{display:inline-block;font-family:var(--m);font-size:10.5px;letter-spacing:.12em;color:var(--acc2);background:rgba(0,229,195,.08);border:1px solid rgba(0,229,195,.2);padding:3px 10px;border-radius:3px;margin-bottom:16px}
+h1{font-size:clamp(26px,3.5vw,44px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
 h1 em{color:var(--acc);font-style:normal}
-.sub{color:var(--tx2);margin-top:7px;font-size:13.5px}
-.hdr-meta{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap}
-.hm{font-family:var(--m);font-size:10px;color:var(--mu);letter-spacing:.08em}
-.hm strong{display:block;color:var(--tx);font-size:12px;margin-bottom:1px}
-.badge-v{display:inline-block;background:rgba(0,229,195,.1);border:1px solid rgba(0,229,195,.22);color:var(--acc2);font-family:var(--m);font-size:10.5px;padding:4px 12px;border-radius:4px;margin-top:12px}
-
-/* SECTIONS */
-.sec{padding:42px 56px;border-bottom:1px solid var(--bdr)}
-.sl{font-family:var(--m);font-size:9.5px;letter-spacing:.15em;color:var(--mu);text-transform:uppercase;margin-bottom:5px}
-h2{font-size:19px;font-weight:800;margin-bottom:22px;letter-spacing:-.01em}
-h3{font-size:13.5px;font-weight:700;margin-bottom:12px;color:var(--tx2)}
-
-/* KPI GRID */
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:12px}
-.kpi{background:var(--s);border:1px solid var(--bdr);border-radius:9px;padding:16px 18px;position:relative;overflow:hidden}
+.sub{color:var(--tx2);margin-top:8px;font-size:14px}
+.hdr-meta{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap}
+.hm{font-family:var(--m);font-size:10.5px;color:var(--mu);letter-spacing:.08em}
+.hm strong{display:block;color:var(--tx);font-size:12.5px;margin-bottom:1px}
+.badge-match{display:inline-block;background:rgba(0,229,195,.1);border:1px solid rgba(0,229,195,.25);color:var(--acc2);font-family:var(--m);font-size:11px;padding:4px 12px;border-radius:4px;margin-top:14px}
+.sec{padding:44px 56px;border-bottom:1px solid var(--bdr)}
+.sl{font-family:var(--m);font-size:10px;letter-spacing:.15em;color:var(--mu);text-transform:uppercase;margin-bottom:6px}
+h2{font-size:20px;font-weight:800;margin-bottom:24px;letter-spacing:-.01em}
+h3{font-size:14px;font-weight:700;margin-bottom:14px;color:var(--tx2)}
+.ans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.ans{background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:20px 22px}
+.ans-q{font-family:var(--m);font-size:10px;letter-spacing:.1em;color:var(--mu);margin-bottom:10px}
+.ans-v{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.ans-note{font-size:12px;color:var(--tx2);margin-top:8px;line-height:1.65}
+.ok{color:var(--ok)} .err{color:var(--err)} .warn{color:var(--warn)}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:13px}
+.kpi{background:var(--s);border:1px solid var(--bdr);border-radius:9px;padding:17px 19px;position:relative;overflow:hidden}
 .kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--kc,var(--acc))}
-.kpi-lbl{font-family:var(--m);font-size:8.5px;letter-spacing:.1em;color:var(--mu);margin-bottom:7px}
-.kpi-vals{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
-.kv-m{font-size:8.5px;color:var(--mu);margin-bottom:1px}
-.kv-n{font-size:17px;font-weight:800;letter-spacing:-.02em}
+.kpi-lbl{font-family:var(--m);font-size:9px;letter-spacing:.1em;color:var(--mu);margin-bottom:8px}
+.kpi-vals{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
+.kv-m{font-size:9px;color:var(--mu);margin-bottom:1px}
+.kv-n{font-size:18px;font-weight:800;letter-spacing:-.02em}
 .kv-n.a{color:var(--tx2)} .kv-n.b{color:var(--tx)}
-.delta{font-family:var(--m);font-size:9.5px;padding:2px 6px;border-radius:3px;margin-left:auto;align-self:flex-start}
+.delta{font-family:var(--m);font-size:10px;padding:2px 7px;border-radius:3px;margin-left:auto;align-self:flex-start}
 .du{background:rgba(0,209,122,.12);color:var(--ok)}.dd{background:rgba(255,59,78,.12);color:var(--err)}.dw{background:rgba(255,149,0,.12);color:var(--warn)}
-
-/* TABLES */
-.tw{overflow-x:auto;margin-top:3px}
-table{width:100%;border-collapse:collapse;font-size:12.5px}
-thead th{font-family:var(--m);font-size:8.5px;letter-spacing:.09em;color:var(--mu);text-transform:uppercase;padding:9px 11px;text-align:left;border-bottom:1px solid var(--bdr);white-space:nowrap}
-tbody tr{border-bottom:1px solid rgba(34,34,52,.7)}
-tbody tr:hover{background:rgba(255,255,255,.015)}
-tbody td{padding:8px 11px;color:var(--tx2);vertical-align:middle}
+.tw{overflow-x:auto;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{font-family:var(--m);font-size:9px;letter-spacing:.09em;color:var(--mu);text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:1px solid var(--bdr);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(37,37,53,.6)}
+tbody tr:hover{background:rgba(255,255,255,.018)}
+tbody td{padding:9px 12px;color:var(--tx2);vertical-align:middle}
 tbody td:first-child{color:var(--tx);font-weight:600}
-.num{text-align:right;font-family:var(--m);font-size:11.5px}
-.bdg{display:inline-block;font-family:var(--m);font-size:9px;padding:2px 7px;border-radius:3px;white-space:nowrap}
-.b-ok{background:rgba(0,209,122,.1);color:var(--ok)}.b-err{background:rgba(255,59,78,.12);color:var(--err)}
-.b-warn{background:rgba(255,149,0,.12);color:var(--warn)}.b-mu{background:rgba(78,78,106,.25);color:var(--tx2)}
-.b-prime{background:rgba(167,139,250,.15);color:var(--acc4)}
-tr.hl{background:rgba(0,229,195,.04)} tr.hl td{border-color:rgba(0,229,195,.12)}
-tr.hl2{background:rgba(167,139,250,.04)} tr.hl2 td{border-color:rgba(167,139,250,.1)}
+.num{text-align:right;font-family:var(--m);font-size:12px}
+.bdg{display:inline-block;font-family:var(--m);font-size:9.5px;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.b-ok{background:rgba(0,209,122,.1);color:var(--ok)}.b-err{background:rgba(255,59,78,.12);color:var(--err)}.b-warn{background:rgba(255,149,0,.12);color:var(--warn)}.b-mu{background:rgba(90,90,120,.2);color:var(--tx2)}
+tr.hl{background:rgba(0,229,195,.04)}
+tr.hl td{border-color:rgba(0,229,195,.12)}
+.bars{display:flex;flex-direction:column;gap:9px}
+.brow{display:flex;align-items:center;gap:10px}
+.blbl{font-size:11px;color:var(--tx2);width:120px;flex-shrink:0;text-align:right}
+.btrk{flex:1;height:20px;background:var(--s2);border-radius:3px;overflow:hidden}
+.bfil{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:8px;font-family:var(--m);font-size:10px;white-space:nowrap}
+.bval{font-family:var(--m);font-size:10px;color:var(--mu);width:85px;text-align:right;flex-shrink:0}
+.pol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:13px;margin-bottom:20px}
+.pol{background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:22px 23px}
+.pol-label{font-family:var(--m);font-size:9px;letter-spacing:.12em;margin-bottom:11px}
+.pol-val{font-size:42px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.pol-note{font-size:11.5px;color:var(--tx2);margin-top:8px;line-height:1.65}
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:13px}
+.ac{background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:19px 21px}
+.ac-pr{font-family:var(--m);font-size:9px;letter-spacing:.1em;margin-bottom:8px}
+.ac-ti{font-size:13px;font-weight:700;margin-bottom:7px}
+.ac-bd{font-size:12px;color:var(--tx2);line-height:1.65}
+.ac-imp{margin-top:10px;font-family:var(--m);font-size:11px;color:var(--acc2)}
+.hbox{border-radius:9px;padding:18px 21px;margin-bottom:13px}
+.hbox.red{background:rgba(255,59,78,.06);border:1px solid rgba(255,59,78,.2)}
+.hbox.grn{background:rgba(0,209,122,.05);border:1px solid rgba(0,209,122,.15)}
+.hbox.yel{background:rgba(255,184,48,.05);border:1px solid rgba(255,184,48,.18)}
+.hbox-lbl{font-family:var(--m);font-size:9.5px;letter-spacing:.09em;margin-bottom:8px}
+.hbox-bd{font-size:13px;color:var(--tx2);line-height:1.75}
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.val-box{background:var(--s2);border-left:3px solid var(--acc2);padding:12px 16px;border-radius:4px;margin:8px 0;font-family:var(--m);font-size:12px;color:var(--tx2)}
+.val-box strong{color:var(--tx)}
+.sct thead th{background:var(--s2)}
+.sct tr.rec{background:rgba(0,229,195,.04)}
+.sct tr.rec td:first-child{border-left:3px solid var(--acc2);padding-left:9px}
+.rec-b{display:inline-block;background:var(--acc2);color:#000;font-family:var(--m);font-size:9px;font-weight:700;padding:3px 9px;border-radius:3px}
+@media(max-width:840px){.tc{grid-template-columns:1fr}.sec,.hdr{padding-left:20px;padding-right:20px}}
+footer{padding:26px 56px;text-align:center;font-family:var(--m);font-size:10px;color:var(--mu);border-top:1px solid var(--bdr)}
 
-/* BARS */
-.bars{display:flex;flex-direction:column;gap:8px}
-.brow{display:flex;align-items:center;gap:9px}
-.blbl{font-size:10.5px;color:var(--tx2);width:90px;flex-shrink:0;text-align:right;font-family:var(--m)}
-.btrk{flex:1;height:19px;background:var(--s2);border-radius:3px;overflow:hidden;position:relative}
-.bfil{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:7px;font-family:var(--m);font-size:9.5px;white-space:nowrap;transition:width .8s ease}
-.bval{font-family:var(--m);font-size:9.5px;color:var(--mu);width:75px;text-align:right;flex-shrink:0}
-
-/* TIMELINE */
+/* ─── TIMELINE ─── */
 .timeline{position:relative;margin-top:8px}
 .timeline::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:2px;background:var(--bdr)}
 .tl-item{display:flex;gap:20px;margin-bottom:0;position:relative}
@@ -90,317 +103,438 @@ tr.hl2{background:rgba(167,139,250,.04)} tr.hl2 td{border-color:rgba(167,139,250
 .tl-met strong{color:var(--tx)}
 .tl-body{font-size:12px;color:var(--tx2);line-height:1.65;margin-bottom:8px}
 .tl-impact{font-family:var(--m);font-size:10.5px;color:var(--acc2);margin-top:6px}
-
-/* PRIME CARDS */
+/* ─── PRIME CARDS ─── */
+--acc4:#a78bfa;
 .prime-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:12px;margin-bottom:18px}
 .prime-card{background:var(--s);border:1px solid rgba(167,139,250,.2);border-radius:9px;padding:16px 18px;position:relative;overflow:hidden}
-.prime-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--acc4)}
+.prime-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:#a78bfa}
 .pc-lbl{font-family:var(--m);font-size:8.5px;letter-spacing:.1em;color:rgba(167,139,250,.6);margin-bottom:7px}
-.pc-val{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--acc4)}
+.pc-val{font-size:22px;font-weight:800;letter-spacing:-.02em;color:#a78bfa}
 .pc-sub{font-size:11px;color:var(--tx2);margin-top:5px}
-
-/* HBOX */
-.hbox{border-radius:9px;padding:17px 20px;margin-bottom:12px}
-.hbox.red{background:rgba(255,59,78,.06);border:1px solid rgba(255,59,78,.18)}
-.hbox.grn{background:rgba(0,209,122,.05);border:1px solid rgba(0,209,122,.14)}
-.hbox.yel{background:rgba(255,184,48,.05);border:1px solid rgba(255,184,48,.16)}
+.b-prime{background:rgba(167,139,250,.15);color:#a78bfa}
+tr.hl2{background:rgba(167,139,250,.04)} tr.hl2 td{border-color:rgba(167,139,250,.1)}
 .hbox.pur{background:rgba(167,139,250,.05);border:1px solid rgba(167,139,250,.18)}
-.hbox.blu{background:rgba(91,143,255,.05);border:1px solid rgba(91,143,255,.18)}
-.hbox-lbl{font-family:var(--m);font-size:9px;letter-spacing:.09em;margin-bottom:7px}
-.hbox-bd{font-size:12.5px;color:var(--tx2);line-height:1.75}
-
-/* POL CARDS */
-.pol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:12px;margin-bottom:18px}
-.pol{background:var(--s);border:1px solid var(--bdr);border-radius:9px;padding:20px 22px}
-.pol-lbl{font-family:var(--m);font-size:8.5px;letter-spacing:.12em;margin-bottom:10px}
-.pol-val{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1}
-.pol-note{font-size:11px;color:var(--tx2);margin-top:7px;line-height:1.65}
-
-/* FINAL BOX */
 .final-box{background:linear-gradient(135deg,rgba(0,229,195,.06) 0%,rgba(167,139,250,.04) 100%);border:1px solid rgba(0,229,195,.2);border-radius:12px;padding:28px 30px}
 
-.tc{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-@media(max-width:820px){.tc{grid-template-columns:1fr}.sec,.hdr{padding-left:18px;padding-right:18px}}
-footer{padding:24px 56px;text-align:center;font-family:var(--m);font-size:9.5px;color:var(--mu);border-top:1px solid var(--bdr)}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="hdr">
-  <div class="tag">ANÁLISE FINANCEIRA DE FRETE + MIESS PRIME · ABR–MAI 2026 · v3</div>
-  <h1>Plano de Execução<br><em>Frete + Prime</em> → Meta</h1>
-  <p class="sub">Subsídio real validado · Plano gradual 180 dias · Metas Prime com histórico real · Projeção R$4,17M/ano</p>
-  <div class="badge-v">✓ Match exato validado: AD415536856BR → frete R$12,36 − correios R$9,37 = ganho R$2,99</div>
+  <div class="tag">ANÁLISE FINANCEIRA ESTRATÉGICA · MIESS · ABR–MAI 2026 · v2</div>
+  <h1>Resultado Real de Frete<br><em>Validado pedido a pedido</em></h1>
+  <p class="sub">Match exato: Nr. de rastreio KPL ↔ Numero da Etiqueta Correios · 34.276 pedidos · R$9,2M GMV · Inclui Miess Prime + Plano 180 dias</p>
+  <div class="badge-match">✓ Validado com exemplo real: AD415536856BR · Frete cliente R$12,36 − Correios R$9,37 = Ganho R$2,99</div>
   <div class="hdr-meta">
+    <div class="hm"><strong>Match rate Abril</strong>75,6% dos pedidos</div>
+    <div class="hm"><strong>Match rate Maio</strong>71,2% dos pedidos</div>
     <div class="hm"><strong>Subsídio REAL Maio</strong>−R$456.914/mês</div>
     <div class="hm"><strong>Meta 90 dias</strong>−R$123.250/mês</div>
-    <div class="hm"><strong>Meta 180 dias</strong>−R$109.349/mês</div>
-    <div class="hm"><strong>Prime hoje</strong>65 ass. | R$23.328/mês</div>
-    <div class="hm"><strong>Meta Prime 6 meses</strong>200 ass. | R$69.504/mês</div>
-    <div class="hm"><strong>Economia total projetada</strong>R$4,17M/ano</div>
+    <div class="hm"><strong>Prime hoje</strong>65 ass · R$23.328/mês</div><div class="hm"><strong>Meta Prime</strong>200 ass · R$69.504/mês</div>
   </div>
 </div>
 
-<!-- NÚMEROS REAIS -->
+<!-- RESPOSTAS DIRETAS -->
+<div class="sec">
+  <div class="sl">Respostas Diretas — Números Reais</div>
+  <h2>5 Perguntas, 5 Respostas com Dados Reais</h2>
+  <div class="ans-grid">
+
+    <div class="ans">
+      <div class="ans-q">P1 — CUSTO LÍQUIDO DE FRETE — ABRIL</div>
+      <div class="ans-v err">−R$ 352.009</div>
+      <div class="ans-note">
+        Frete cobrado clientes: <strong>R$87.369</strong><br>
+        Custo pago Correios: <strong>R$439.378</strong><br>
+        Resultado % GMV: <strong class="err">−8,90%</strong><br>
+        A cada R$100 vendidos, R$8,90 saíram do caixa para subsidiar frete.
+      </div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P2 — CUSTO LÍQUIDO DE FRETE — MAIO</div>
+      <div class="ans-v err">−R$ 408.840</div>
+      <div class="ans-note">
+        Frete cobrado clientes: <strong>R$104.622</strong><br>
+        Custo pago Correios: <strong>R$513.462</strong><br>
+        Resultado % GMV: <strong class="err">−7,80%</strong><br>
+        Melhora de 1,10pp vs Abril — eficiência logística melhorou.
+      </div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P3 — ECONOMIA REAL COM A MUDANÇA</div>
+      <div class="ans-v warn">−R$ 56.831</div>
+      <div class="ans-note">
+        O custo líquido <strong>piorou R$56.831/mês</strong> em valor absoluto.<br>
+        <span class="ok">Mas como % do GMV melhorou: −8,90% → −7,80%</span><br>
+        O GMV cresceu +32,5% (+R$1,3M) enquanto o custo cresceu +16,1%.<br>
+        <strong>Conclusão: mais eficiente por real vendido, mas ainda sem economia real.</strong>
+      </div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P4 — GANHO DE TICKET MÉDIO</div>
+      <div class="ans-v ok">+R$ 22,91</div>
+      <div class="ans-note">
+        R$255,74 → R$278,65 (+9,0%)<br>
+        Ticket frete grátis: R$352,58 → R$365,95 (+R$13,38)<br>
+        <strong>Prova de cart-building:</strong> 1.118 pedidos em R$250–299 com 98% frete grátis — clientes comprando exatamente para atingir o threshold.
+      </div>
+    </div>
+
+    <div class="ans">
+      <div class="ans-q">P5 — O TICKET COMPENSOU O FRETE?</div>
+      <div class="ans-v warn">Não ainda</div>
+      <div class="ans-note">
+        O ganho de ticket (+R$22,91) gerou mais GMV mas não reduziu o custo absoluto de frete. Para compensar, o threshold precisa ser elevado. <strong>Com o Cenário C (R$249/R$349), o custo líquido cairia de R$408k para R$155k/mês.</strong>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="sec">
+  <div class="sl">Comparativo Financeiro</div>
+  <h2>Abril × Maio 2026 — Números Consolidados</h2>
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:var(--acc2)">
+      <div class="kpi-lbl">PEDIDOS TOTAIS</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a">15.466</div></div><div><div class="kv-m">MAI</div><div class="kv-n b">18.810</div></div><div class="delta du">+21,6%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--acc2)">
+      <div class="kpi-lbl">GMV TOTAL</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:14px">R$3,95M</div></div><div><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:14px">R$5,24M</div></div><div class="delta du">+32,5%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--acc3)">
+      <div class="kpi-lbl">TICKET MÉDIO</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a">R$255,74</div></div><div><div class="kv-m">MAI</div><div class="kv-n b">R$278,65</div></div><div class="delta du">+9,0%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--ok)">
+      <div class="kpi-lbl">FRETE COBRADO CLIENTES</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:13px">R$87.369</div></div><div><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:13px">R$104.622</div></div><div class="delta du">+19,7%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--err)">
+      <div class="kpi-lbl">CUSTO PAGO CORREIOS</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:13px">R$439.378</div></div><div><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:13px">R$513.462</div></div><div class="delta dd">+16,9%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--err)">
+      <div class="kpi-lbl">RESULTADO LÍQUIDO FRETE</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a" style="font-size:13px">−R$352k</div></div><div><div class="kv-m">MAI</div><div class="kv-n b" style="font-size:13px">−R$408k</div></div><div class="delta dd">−16,1%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--ok)">
+      <div class="kpi-lbl">RESULTADO % GMV</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a">−8,90%</div></div><div><div class="kv-m">MAI</div><div class="kv-n b">−7,80%</div></div><div class="delta du">+1,10pp</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--warn)">
+      <div class="kpi-lbl">% FRETE GRÁTIS</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a">61,8%</div></div><div><div class="kv-m">MAI</div><div class="kv-n b">67,4%</div></div><div class="delta dd">+5,6pp ⚠</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--acc3)">
+      <div class="kpi-lbl">TICKET MÉDIO FRETE GRÁTIS</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a">R$352,58</div></div><div><div class="kv-m">MAI</div><div class="kv-n b">R$365,95</div></div><div class="delta du">+3,8%</div></div>
+    </div>
+    <div class="kpi" style="--kc:var(--mu)">
+      <div class="kpi-lbl">TICKET MÉDIO FRETE PAGO</div>
+      <div class="kpi-vals"><div><div class="kv-m">ABR</div><div class="kv-n a">R$98,86</div></div><div><div class="kv-m">MAI</div><div class="kv-n b">R$98,03</div></div><div class="delta dw">−0,8%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAIXAS DE TICKET -->
+<div class="sec">
+  <div class="sl">Faixas de Ticket — Maio</div>
+  <h2>Onde o Dinheiro Está Saindo — Por Faixa de Valor</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Faixa</th><th class="num">Pedidos</th><th class="num">Ticket Méd</th><th class="num">Frete Cli</th><th class="num">Custo Corr</th><th class="num">Resultado Miess</th><th class="num">Result%GMV</th><th class="num">%FG</th><th>Diagnóstico</th></tr></thead>
+      <tbody>
+        <tr><td>Até R$99</td><td class="num">4.094</td><td class="num">R$53,62</td><td class="num">R$58.625</td><td class="num">R$87.976</td><td class="num err">−R$29.351</td><td class="num err">−13,4%</td><td class="num">26%</td><td><span class="bdg b-warn">Frete cobrado — sustentável</span></td></tr>
+        <tr><td>R$100–149</td><td class="num">1.827</td><td class="num">R$120,10</td><td class="num">R$18.357</td><td class="num">R$56.309</td><td class="num err">−R$37.952</td><td class="num err">−17,3%</td><td class="num">59%</td><td><span class="bdg b-err">Alto custo — revisar</span></td></tr>
+        <tr><td>R$150–199</td><td class="num">1.432</td><td class="num">R$170,85</td><td class="num">R$13.368</td><td class="num">R$52.606</td><td class="num err">−R$39.238</td><td class="num err">−16,0%</td><td class="num">66%</td><td><span class="bdg b-err">Alto custo — revisar</span></td></tr>
+        <tr><td>R$200–249</td><td class="num">1.010</td><td class="num">R$220,19</td><td class="num">R$9.604</td><td class="num">R$38.919</td><td class="num err">−R$29.315</td><td class="num err">−13,2%</td><td class="num">69%</td><td><span class="bdg b-warn">Elevado</span></td></tr>
+        <tr style="background:rgba(255,59,78,.04)"><td><strong>R$250–299 ⚠</strong></td><td class="num">1.118</td><td class="num">R$269,15</td><td class="num">R$734</td><td class="num">R$46.296</td><td class="num err">−R$45.562</td><td class="num err">−15,1%</td><td class="num err">98%</td><td><span class="bdg b-err">SANGRAMENTO — 98% grátis</span></td></tr>
+        <tr style="background:rgba(255,59,78,.04)"><td><strong>R$300–349 ⚠</strong></td><td class="num">893</td><td class="num">R$319,26</td><td class="num">R$541</td><td class="num">R$42.825</td><td class="num err">−R$42.283</td><td class="num err">−14,8%</td><td class="num err">99%</td><td><span class="bdg b-err">SANGRAMENTO — 99% grátis</span></td></tr>
+        <tr><td>R$350–399</td><td class="num">557</td><td class="num">R$371,91</td><td class="num">R$555</td><td class="num">R$27.213</td><td class="num err">−R$26.658</td><td class="num err">−12,9%</td><td class="num">98%</td><td><span class="bdg b-warn">Elevado</span></td></tr>
+        <tr><td>R$400+</td><td class="num">2.463</td><td class="num">R$761,56</td><td class="num">R$2.838</td><td class="num">R$161.319</td><td class="num err">−R$158.481</td><td class="num ok">−8,4%</td><td class="num">98%</td><td><span class="bdg b-ok">Result%GMV saudável</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="hbox yel" style="margin-top:18px">
+    <div class="hbox-lbl" style="color:var(--acc3)">⚠ FAIXAS R$250–349: SANGRAMENTO DE R$87.845/MÊS = R$1,05M/ANO</div>
+    <div class="hbox-bd">2.011 pedidos com 98–99% frete grátis, resultado%GMV de −14,8% a −15,1%. São os pedidos "atingiu o threshold exatamente" — <strong style="color:var(--tx)">prova matemática de cart-building</strong>. Elevar o threshold de R$249 para R$299 cobre boa parte desse grupo sem perder margem de produto.</div>
+  </div>
+</div>
+
+<!-- REGIONAL -->
+<div class="sec">
+  <div class="sl">Análise Regional</div>
+  <h2>Resultado por Região — Maio 2026</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Região</th><th class="num">Pedidos</th><th class="num">GMV</th><th class="num">Ticket</th><th class="num">Frete Cli</th><th class="num">Custo Corr</th><th class="num">Resultado</th><th class="num">Result%GMV</th><th class="num">CustoMéd/obj</th><th class="num">%FG</th></tr></thead>
+      <tbody>
+        <tr><td>Sudeste</td><td class="num">6.056</td><td class="num">R$1.231.123</td><td class="num">R$203</td><td class="num">R$55.453</td><td class="num">R$122.775</td><td class="num err">−R$67.322</td><td class="num ok">−5,5%</td><td class="num ok">R$20,27</td><td class="num">47%</td></tr>
+        <tr><td>Sul</td><td class="num">1.913</td><td class="num">R$511.902</td><td class="num">R$268</td><td class="num">R$19.304</td><td class="num">R$61.164</td><td class="num err">−R$41.860</td><td class="num warn" style="color:var(--warn)">−8,2%</td><td class="num">R$31,97</td><td class="num">64%</td></tr>
+        <tr><td>Centro-Oeste</td><td class="num">1.250</td><td class="num">R$388.069</td><td class="num">R$310</td><td class="num">R$10.108</td><td class="num">R$54.615</td><td class="num err">−R$44.507</td><td class="num" style="color:var(--warn)">−11,5%</td><td class="num">R$43,69</td><td class="num">73%</td></tr>
+        <tr style="background:rgba(255,59,78,.03)"><td><strong>Nordeste</strong></td><td class="num">3.301</td><td class="num">R$1.113.357</td><td class="num">R$337</td><td class="num">R$14.703</td><td class="num">R$212.329</td><td class="num err">−R$197.626</td><td class="num err">−17,8%</td><td class="num err">R$64,32</td><td class="num err">89%</td></tr>
+        <tr style="background:rgba(255,59,78,.03)"><td><strong>Norte</strong></td><td class="num">874</td><td class="num">R$329.986</td><td class="num">R$378</td><td class="num">R$5.054</td><td class="num">R$62.579</td><td class="num err">−R$57.525</td><td class="num err">−17,4%</td><td class="num err">R$71,60</td><td class="num err">89%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:16px">
+    <div class="hbox red">
+      <div class="hbox-lbl" style="color:var(--err)">NORDESTE + NORTE = 54% DO CUSTO, 31% DO VOLUME</div>
+      <div class="hbox-bd">Resultado%GMV de −17 a −18% nessas regiões. 89% de frete grátis. SEDEX Nordeste custa em média R$89,98/obj. A empresa perde ~R$60 por pedido Nordeste/Norte com SEDEX grátis. <strong style="color:var(--tx)">Regra regional separada é a ação de maior ROI.</strong></div>
+    </div>
+    <div class="hbox grn">
+      <div class="hbox-lbl" style="color:var(--ok)">SUDESTE: ÚNICO COM RESULTADO SAUDÁVEL</div>
+      <div class="hbox-bd">Resultado%GMV de −5,5% — dentro da faixa aceitável para e-commerce. SEDEX SP custa R$13,57/obj em média. <strong style="color:var(--tx)">Oferecer SEDEX grátis no Sudeste é estrategicamente correto.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOP 20 ESTADOS -->
+<div class="sec">
+  <div class="sl">Ranking de Estados</div>
+  <h2>Top 20 Estados — Maior Custo Líquido para a Miess (Maio)</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>UF</th><th class="num">Pedidos</th><th class="num">Ticket</th><th class="num">Frete Cli</th><th class="num">Custo Corr</th><th class="num">Resultado Miess</th><th class="num">Result%GMV</th><th class="num">Custo Méd</th><th class="num">%FG</th></tr></thead>
+      <tbody>
+        <tr><td>BA</td><td class="num">931</td><td class="num">R$366</td><td class="num">R$5.621</td><td class="num">R$43.173</td><td class="num err">−R$37.553</td><td class="num err">−11,0%</td><td class="num">R$46</td><td class="num">83%</td></tr>
+        <tr><td>CE</td><td class="num">545</td><td class="num">R$293</td><td class="num">R$2.398</td><td class="num">R$36.704</td><td class="num err">−R$34.306</td><td class="num err">−21,5%</td><td class="num err">R$67</td><td class="num">90%</td></tr>
+        <tr><td>PE</td><td class="num">549</td><td class="num">R$305</td><td class="num">R$2.043</td><td class="num">R$33.413</td><td class="num err">−R$31.370</td><td class="num err">−18,7%</td><td class="num err">R$61</td><td class="num">91%</td></tr>
+        <tr><td>PA</td><td class="num">481</td><td class="num">R$353</td><td class="num">R$1.986</td><td class="num">R$33.171</td><td class="num err">−R$31.185</td><td class="num err">−18,4%</td><td class="num err">R$69</td><td class="num">91%</td></tr>
+        <tr><td>MA</td><td class="num">404</td><td class="num">R$347</td><td class="num">R$1.492</td><td class="num">R$32.318</td><td class="num err">−R$30.826</td><td class="num err">−22,0%</td><td class="num err">R$80</td><td class="num">94%</td></tr>
+        <tr><td>MG</td><td class="num">1.108</td><td class="num">R$248</td><td class="num">R$10.280</td><td class="num">R$37.147</td><td class="num err">−R$26.868</td><td class="num warn" style="color:var(--warn)">−9,8%</td><td class="num">R$34</td><td class="num">67%</td></tr>
+        <tr><td>PB</td><td class="num">282</td><td class="num">R$280</td><td class="num">R$676</td><td class="num">R$19.947</td><td class="num err">−R$19.270</td><td class="num err">−24,4%</td><td class="num err">R$71</td><td class="num">95%</td></tr>
+        <tr><td>SP</td><td class="num">3.846</td><td class="num">R$177</td><td class="num">R$33.717</td><td class="num">R$52.192</td><td class="num">−R$18.475</td><td class="num ok">−2,7%</td><td class="num ok">R$14</td><td class="num">38%</td></tr>
+        <tr><td>RN</td><td class="num">216</td><td class="num">R$419</td><td class="num">R$388</td><td class="num">R$17.828</td><td class="num err">−R$17.441</td><td class="num err">−19,3%</td><td class="num err">R$83</td><td class="num">95%</td></tr>
+        <tr><td>RS</td><td class="num">713</td><td class="num">R$276</td><td class="num">R$6.855</td><td class="num">R$23.767</td><td class="num">−R$16.912</td><td class="num warn" style="color:var(--warn)">−8,6%</td><td class="num">R$33</td><td class="num">65%</td></tr>
+        <tr><td>RO</td><td class="num">177</td><td class="num">R$415</td><td class="num">R$721</td><td class="num">R$15.789</td><td class="num err">−R$15.068</td><td class="num err">−20,5%</td><td class="num err">R$89</td><td class="num">93%</td></tr>
+        <tr><td>PR</td><td class="num">654</td><td class="num">R$267</td><td class="num">R$6.582</td><td class="num">R$21.426</td><td class="num">−R$14.844</td><td class="num warn" style="color:var(--warn)">−8,5%</td><td class="num">R$33</td><td class="num">65%</td></tr>
+        <tr><td>RJ</td><td class="num">811</td><td class="num">R$229</td><td class="num">R$9.052</td><td class="num">R$23.170</td><td class="num">−R$14.118</td><td class="num warn" style="color:var(--warn)">−7,6%</td><td class="num">R$29</td><td class="num">59%</td></tr>
+        <tr><td>MT</td><td class="num">308</td><td class="num">R$314</td><td class="num">R$2.697</td><td class="num">R$14.501</td><td class="num err">−R$11.804</td><td class="num err">−12,2%</td><td class="num">R$47</td><td class="num">76%</td></tr>
+        <tr><td>SC</td><td class="num">546</td><td class="num">R$257</td><td class="num">R$5.867</td><td class="num">R$15.971</td><td class="num">−R$10.105</td><td class="num warn" style="color:var(--warn)">−7,2%</td><td class="num">R$29</td><td class="num">59%</td></tr>
+        <tr><td>PI</td><td class="num">134</td><td class="num">R$337</td><td class="num">R$842</td><td class="num">R$10.615</td><td class="num err">−R$9.773</td><td class="num err">−21,6%</td><td class="num err">R$79</td><td class="num">90%</td></tr>
+        <tr><td>AL</td><td class="num">128</td><td class="num">R$364</td><td class="num">R$619</td><td class="num">R$9.673</td><td class="num err">−R$9.054</td><td class="num err">−19,4%</td><td class="num err">R$76</td><td class="num">89%</td></tr>
+        <tr><td>TO</td><td class="num">128</td><td class="num">R$395</td><td class="num">R$321</td><td class="num">R$8.420</td><td class="num err">−R$8.099</td><td class="num err">−16,0%</td><td class="num">R$66</td><td class="num">92%</td></tr>
+        <tr><td>SE</td><td class="num">112</td><td class="num">R$388</td><td class="num">R$624</td><td class="num">R$8.657</td><td class="num err">−R$8.033</td><td class="num err">−18,5%</td><td class="num err">R$77</td><td class="num">91%</td></tr>
+        <tr><td>ES</td><td class="num">291</td><td class="num">R$307</td><td class="num">R$2.405</td><td class="num">R$10.265</td><td class="num">−R$7.861</td><td class="num warn" style="color:var(--warn)">−8,8%</td><td class="num">R$35</td><td class="num">71%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SIMULAÇÕES -->
+<div class="sec">
+  <div class="sl">Simulações</div>
+  <h2>Cenários de Política de Frete — Base Real de Maio</h2>
+  <p style="color:var(--tx2);font-size:13px;margin-bottom:20px">Metodologia: pedidos abaixo do threshold → cobrar custo médio real (PAC=R$34,04 / SEDEX=R$42,21). Pedidos acima → frete grátis mantido. Resultado = frete_cobrado − custo_correios.</p>
+  <div class="tw">
+    <table class="sct">
+      <thead><tr><th>Cenário</th><th>PAC Grátis</th><th>SEDEX Grátis</th><th class="num">Resultado/mês</th><th class="num">Melhora/mês</th><th class="num">Melhora/ano</th><th class="num">%FG</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>Atual (Maio)</td><td>—</td><td>—</td><td class="num err">−R$408.840</td><td class="num">—</td><td class="num">—</td><td class="num">65,2%</td><td><span class="bdg b-mu">Base</span></td></tr>
+        <tr><td>A</td><td>≥ R$199</td><td>≥ R$250</td><td class="num err">−R$216.955</td><td class="num ok">+R$191.885</td><td class="num ok">+R$2,30M</td><td class="num">41,7%</td><td><span class="bdg b-warn">Alto</span></td></tr>
+        <tr><td>B</td><td>≥ R$229</td><td>≥ R$299</td><td class="num err">−R$182.710</td><td class="num ok">+R$226.130</td><td class="num ok">+R$2,71M</td><td class="num">35,0%</td><td><span class="bdg b-warn">Alto</span></td></tr>
+        <tr class="hl"><td><strong>C ★</strong></td><td><strong>≥ R$249</strong></td><td><strong>≥ R$349</strong></td><td class="num err"><strong>−R$155.723</strong></td><td class="num ok"><strong>+R$253.117</strong></td><td class="num ok"><strong>+R$3,04M</strong></td><td class="num"><strong>29,8%</strong></td><td><span class="rec-b">RECOMENDADO</span></td></tr>
+        <tr><td>D</td><td>≥ R$299</td><td>≥ R$399</td><td class="num err">−R$122.071</td><td class="num ok">+R$286.769</td><td class="num ok">+R$3,44M</td><td class="num">23,0%</td><td><span class="bdg b-warn">Médio*</span></td></tr>
+        <tr class="hl"><td><strong>C + Regional ★★</strong></td><td><strong>R$249 + NE R$299 + N R$349</strong></td><td><strong>R$349 + NE R$399 + N R$499</strong></td><td class="num err"><strong>−R$139.946</strong></td><td class="num ok"><strong>+R$268.894</strong></td><td class="num ok"><strong>+R$3,23M</strong></td><td class="num"><strong>26,6%</strong></td><td><span class="rec-b">ÓTIMO</span></td></tr>
+        <tr><td>D + Regional</td><td>R$299 + NE/N maior</td><td>R$399 + NE/N maior</td><td class="num err">−R$110.428</td><td class="num ok">+R$298.412</td><td class="num ok">+R$3,58M</td><td class="num">20,6%</td><td><span class="bdg b-warn">Médio*</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--mu);margin-top:10px;font-family:var(--m)">*Cenário D pode reduzir conversão — recomenda-se teste A/B. **C+Regional é o ponto ótimo: maior economia sem risco alto de perda de volume.</p>
+</div>
+
+
+<!-- PRIME RECONCILIAÇÃO -->
 <div class="sec">
   <div class="sl">Base Real — PRIME + KPL + Correios</div>
-  <h2>Subsídio Real da Operação — Visão Consolidada</h2>
+  <h2>Subsídio Real da Operação — Visão PRIME Consolidada</h2>
   <div class="hbox yel">
-    <div class="hbox-lbl" style="color:var(--acc3)">⚠ NÚMERO REAL vs ANÁLISE PARCIAL ANTERIOR</div>
-    <div class="hbox-bd">A análise anterior usava apenas 71,2% dos pedidos com match Correios, gerando subsídio de R$408.840. Os dados do PRIME revelam o custo TOTAL: R$599.369 pago em frete, menos R$119.127 cobrado dos clientes e menos R$23.328 de receita Prime = <strong style="color:var(--tx)">subsídio real de R$456.914/mês</strong>. A diferença de R$48k é de fretes sem match (Tex/motoboy/outros). Todos os cenários desta versão usam o número real.</div>
+    <div class="hbox-lbl" style="color:var(--acc3)">⚠ NÚMERO REAL (PRIME) vs ANÁLISE PARCIAL (KPL)</div>
+    <div class="hbox-bd">A análise KPL usava apenas 71,2% dos pedidos com match Correios, gerando subsídio de R$408.840. Os dados do PRIME revelam o custo total: R$599.369 pagos em frete − R$119.127 cobrado dos clientes − R$23.328 de receita Prime = <strong style="color:var(--tx)">subsídio real de R$456.914/mês</strong>. A diferença de R$48k são fretes sem match (Tex/motoboy/outros). Todos os cenários abaixo usam o número real do PRIME.</div>
   </div>
-
-  <div class="kpi-row" style="margin-top:20px">
+  <div class="kpi-row" style="margin-top:18px">
     <div class="kpi" style="--kc:var(--err)">
-      <div class="kpi-lbl">TOTAL PAGO EM FRETE (MAIO)</div>
-      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:15px">R$599.369</div><div style="font-size:10px;color:var(--mu);margin-top:2px">100% dos transportes</div></div></div>
+      <div class="kpi-lbl">TOTAL PAGO FRETE (PRIME — MAIO)</div>
+      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:14px">R$599.369</div><div style="font-size:9px;color:var(--mu);margin-top:2px">100% dos transportes</div></div></div>
     </div>
     <div class="kpi" style="--kc:var(--ok)">
       <div class="kpi-lbl">RECEITA FRETES (CLIENTES)</div>
-      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:15px;color:var(--ok)">R$119.127</div><div style="font-size:10px;color:var(--mu);margin-top:2px">19,9% de cobertura</div></div></div>
+      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:14px;color:var(--ok)">R$119.127</div><div style="font-size:9px;color:var(--mu);margin-top:2px">19,9% de cobertura</div></div></div>
     </div>
-    <div class="kpi" style="--kc:var(--acc4)">
+    <div class="kpi" style="--kc:#a78bfa">
       <div class="kpi-lbl">RECEITA ASSINATURAS PRIME</div>
-      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:15px;color:var(--acc4)">R$23.328</div><div style="font-size:10px;color:var(--mu);margin-top:2px">65 ass · R$347/ass</div></div></div>
+      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:14px;color:#a78bfa">R$23.328</div><div style="font-size:9px;color:var(--mu);margin-top:2px">65 ass · R$347/ass</div></div></div>
     </div>
     <div class="kpi" style="--kc:var(--err)">
       <div class="kpi-lbl">SUBSÍDIO LÍQUIDO REAL</div>
-      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:15px;color:var(--err)">−R$456.914</div><div style="font-size:10px;color:var(--mu);margin-top:2px">76,2% não coberto</div></div></div>
+      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:14px;color:var(--err)">−R$456.914</div><div style="font-size:9px;color:var(--mu);margin-top:2px">76,2% descoberto</div></div></div>
     </div>
     <div class="kpi" style="--kc:var(--warn)">
       <div class="kpi-lbl">COBERTURA ATUAL TOTAL</div>
-      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:17px;color:var(--warn)">23,8%</div><div style="font-size:10px;color:var(--mu);margin-top:2px">Meta 6 meses: 50%+</div></div></div>
+      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:16px;color:var(--warn)">23,8%</div><div style="font-size:9px;color:var(--mu);margin-top:2px">Meta 6 meses: 80%+</div></div></div>
     </div>
     <div class="kpi" style="--kc:var(--acc2)">
-      <div class="kpi-lbl">META: SUBSÍDIO MENSAL</div>
-      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:15px;color:var(--acc2)">−R$109.349</div><div style="font-size:10px;color:var(--mu);margin-top:2px">Em 180 dias (política+prime)</div></div></div>
+      <div class="kpi-lbl">META SUBSÍDIO (180 DIAS)</div>
+      <div class="kpi-vals"><div><div class="kv-n b" style="font-size:14px;color:var(--acc2)">−R$109.349</div><div style="font-size:9px;color:var(--mu);margin-top:2px">Política + 200 Prime</div></div></div>
     </div>
   </div>
+  <div class="tw" style="margin-top:20px">
+    <table>
+      <thead><tr><th>Mês</th><th class="num">Total Pago Frete</th><th class="num">Receita Fretes</th><th class="num">Receita Assinaturas</th><th class="num">Qtd. Ass.</th><th class="num">Ticket/Ass.</th><th class="num">Cobertura Total</th><th class="num">Subsídio Líquido</th></tr></thead>
+      <tbody>
+        <tr><td>Janeiro</td><td class="num">R$622.633</td><td class="num">R$163.379</td><td class="num" style="color:#a78bfa">R$20.063</td><td class="num">59</td><td class="num">R$340</td><td class="num">29,5%</td><td class="num err">−R$439.191</td></tr>
+        <tr><td>Fevereiro</td><td class="num">R$553.492</td><td class="num">R$128.886</td><td class="num" style="color:#a78bfa">R$13.935</td><td class="num">39</td><td class="num">R$357</td><td class="num">25,8%</td><td class="num err">−R$410.671</td></tr>
+        <tr><td>Março ⭐</td><td class="num">R$588.585</td><td class="num">R$152.461</td><td class="num" style="color:#a78bfa">R$41.604</td><td class="num" style="color:var(--ok)">122</td><td class="num">R$341</td><td class="num ok">33,0%</td><td class="num err">−R$394.519</td></tr>
+        <tr><td>Abril</td><td class="num">R$56.174</td><td class="num">R$129.311</td><td class="num" style="color:#a78bfa">R$28.927</td><td class="num">85</td><td class="num">R$340</td><td class="num" style="color:var(--warn)">⚠ dado parcial</td><td class="num">—</td></tr>
+        <tr><td>Maio</td><td class="num">R$599.369</td><td class="num">R$119.127</td><td class="num" style="color:#a78bfa">R$23.328</td><td class="num">65</td><td class="num">R$359</td><td class="num">23,8%</td><td class="num err">−R$456.914</td></tr>
+        <tr style="background:rgba(0,229,195,.04)"><td><strong>Média (ex-Abr)</strong></td><td class="num"><strong>R$591.020</strong></td><td class="num"><strong>R$140.963</strong></td><td class="num" style="color:#a78bfa"><strong>R$24.733</strong></td><td class="num"><strong>71</strong></td><td class="num"><strong>R$347</strong></td><td class="num"><strong>28,0%</strong></td><td class="num err"><strong>−R$425.324</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:10.5px;color:var(--mu);margin-top:8px;font-family:var(--m)">⚠ Abril com Total Pago Frete = R$56.174 parece dado parcial/incorreto vs média ~R$590k dos outros meses. Excluído da média.</p>
 </div>
 
 <!-- PRIME HISTÓRICO -->
 <div class="sec">
   <div class="sl">Miess Prime — Histórico e Meta</div>
-  <h2>Receita de Assinaturas: Histórico + Projeção</h2>
-
+  <h2>Receita de Assinaturas: Histórico + Projeção de Crescimento</h2>
   <div class="prime-grid">
     <div class="prime-card"><div class="pc-lbl">JANEIRO</div><div class="pc-val">59</div><div class="pc-sub">R$20.063 · R$340/ass</div></div>
     <div class="prime-card"><div class="pc-lbl">FEVEREIRO</div><div class="pc-val">39</div><div class="pc-sub">R$13.935 · R$357/ass</div></div>
-    <div class="prime-card"><div class="pc-lbl">MARÇO ⭐</div><div class="pc-val">122</div><div class="pc-sub">R$41.604 · R$341/ass<br><span style="color:var(--ok);font-size:10px">Pico — o que gerou?</span></div></div>
+    <div class="prime-card" style="border-color:rgba(0,209,122,.3)"><div class="pc-lbl" style="color:rgba(0,209,122,.7)">MARÇO ⭐ PICO</div><div class="pc-val" style="color:var(--ok)">122</div><div class="pc-sub">R$41.604 · R$341/ass<br><span style="color:var(--ok);font-size:10px">O que gerou? Replicar!</span></div></div>
     <div class="prime-card"><div class="pc-lbl">ABRIL</div><div class="pc-val">85</div><div class="pc-sub">R$28.927 · R$340/ass</div></div>
     <div class="prime-card"><div class="pc-lbl">MAIO</div><div class="pc-val">65</div><div class="pc-sub">R$23.328 · R$359/ass</div></div>
-    <div class="prime-card" style="border-color:rgba(0,229,195,.3)"><div class="pc-lbl" style="color:var(--acc2)">MÉDIA HISTÓRICA</div><div class="pc-val" style="color:var(--acc2)">74</div><div class="pc-sub">R$25.572/mês · R$347/ass</div></div>
+    <div class="prime-card" style="border-color:rgba(0,229,195,.3)"><div class="pc-lbl" style="color:var(--acc2)">META 6 MESES</div><div class="pc-val" style="color:var(--acc2)">200</div><div class="pc-sub">R$69.504/mês<br><span style="color:var(--acc2);font-size:10px">+R$46.176 vs hoje</span></div></div>
   </div>
-
   <div class="tc">
     <div>
-      <h3>Evolução de Assinaturas vs Meta</h3>
-      <div class="bars">
-        <div class="brow"><div class="blbl">Jan: 59</div><div class="btrk"><div class="bfil" style="width:29.5%;background:var(--acc4);opacity:.6;color:#000">59 ass</div></div><div class="bval">R$20.063</div></div>
-        <div class="brow"><div class="blbl">Fev: 39</div><div class="btrk"><div class="bfil" style="width:19.5%;background:var(--acc4);opacity:.5;color:#000">39 ass</div></div><div class="bval">R$13.935</div></div>
-        <div class="brow"><div class="blbl">Mar: 122</div><div class="btrk"><div class="bfil" style="width:61%;background:var(--acc4);color:#000">122 ass ⭐</div></div><div class="bval">R$41.604</div></div>
-        <div class="brow"><div class="blbl">Abr: 85</div><div class="btrk"><div class="bfil" style="width:42.5%;background:var(--acc4);opacity:.7;color:#000">85 ass</div></div><div class="bval">R$28.927</div></div>
-        <div class="brow"><div class="blbl">Mai: 65</div><div class="btrk"><div class="bfil" style="width:32.5%;background:var(--acc4);opacity:.6;color:#000">65 ass</div></div><div class="bval">R$23.328</div></div>
-        <div class="brow"><div class="blbl" style="color:var(--ok)">Meta 90d: 160</div><div class="btrk"><div class="bfil" style="width:80%;background:var(--ok);color:#000">meta 160 ass</div></div><div class="bval" style="color:var(--ok)">R$55.603</div></div>
-        <div class="brow"><div class="blbl" style="color:var(--acc2)">Meta 180d: 200</div><div class="btrk"><div class="bfil" style="width:100%;background:var(--acc2);color:#000">meta 200 ass ★</div></div><div class="bval" style="color:var(--acc2)">R$69.504</div></div>
+      <h3>Impacto Financeiro por Faixa de Assinaturas</h3>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Ass. Ativas</th><th class="num">Receita/mês</th><th class="num">Adicional vs hoje</th><th class="num">% cobertura frete</th></tr></thead>
+          <tbody>
+            <tr><td>65 (hoje)</td><td class="num" style="color:#a78bfa">R$22.589</td><td class="num">—</td><td class="num">3,8%</td></tr>
+            <tr><td>80</td><td class="num" style="color:#a78bfa">R$27.802</td><td class="num ok">+R$5.213</td><td class="num">4,6%</td></tr>
+            <tr><td>100</td><td class="num" style="color:#a78bfa">R$34.752</td><td class="num ok">+R$12.163</td><td class="num">5,8%</td></tr>
+            <tr><td>122 (pico março)</td><td class="num" style="color:#a78bfa">R$42.397</td><td class="num ok">+R$19.808</td><td class="num">7,1%</td></tr>
+            <tr><td>160</td><td class="num" style="color:#a78bfa">R$55.603</td><td class="num ok">+R$33.014</td><td class="num ok">9,3%</td></tr>
+            <tr class="hl2"><td><strong>200 ★</strong></td><td class="num" style="color:#a78bfa"><strong>R$69.504</strong></td><td class="num ok"><strong>+R$46.915</strong></td><td class="num ok"><strong>11,6%</strong></td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div>
       <div class="hbox pur">
-        <div class="hbox-lbl" style="color:var(--acc4)">⭐ MARÇO: 122 ASSINATURAS — O QUE ACONTECEU?</div>
-        <div class="hbox-bd">Março teve 3× mais assinaturas que Fevereiro. Identificar qual campanha/ação gerou esse pico é a chave para replicar. Se houver live, landing page ou oferta específica, reativar esse gatilho é mais efetivo que qualquer outra ação isolada. <strong style="color:var(--tx)">Meta: replicar Março toda semana.</strong></div>
+        <div class="hbox-lbl" style="color:#a78bfa">⭐ MARÇO: 122 ASSINATURAS — REPLICAR O PICO</div>
+        <div class="hbox-bd">Março teve 3× mais assinaturas que Fevereiro. Identificar qual campanha/ação gerou esse resultado é a chave. Se foi uma live, landing page ou oferta específica, reativar esse gatilho sistematicamente é a forma mais eficiente de atingir 200 ass. <strong style="color:var(--tx)">Março prova que 122/mês é atingível.</strong></div>
       </div>
       <div class="hbox grn">
-        <div class="hbox-lbl" style="color:var(--ok)">IMPACTO FINANCEIRO DAS METAS PRIME</div>
-        <div class="hbox-bd">
-          <strong style="color:var(--tx)">Cada 10 novas assinaturas</strong> = +R$3.475/mês de cobertura de frete<br>
-          Meta 160 ass → R$55.603/mês (+R$32.275 vs hoje)<br>
-          Meta 200 ass → R$69.504/mês (+R$46.176 vs hoje)<br>
-          <strong style="color:var(--ok)">200 assinaturas cobrem 11,6% do custo total de frete sozinhas.</strong>
-        </div>
+        <div class="hbox-lbl" style="color:var(--ok)">FRAMING: POR QUE VENDER PRIME</div>
+        <div class="hbox-bd">Ticket médio Prime = R$347/mês. Para o cliente: paga menos que um frete e tem frete grátis o ano todo. Para a Miess: assinante compra mais vezes pois o custo marginal de nova compra é zero. <strong style="color:var(--tx)">200 assinaturas = 5.100 fretes PAC Sudeste cobertos por mês.</strong></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PLANO GRADUAL — TIMELINE -->
+<!-- PLANO GRADUAL -->
 <div class="sec">
   <div class="sl">Plano de Execução — 180 Dias</div>
   <h2>Implementação Gradual: Threshold + Regional + Prime</h2>
-  <p style="color:var(--tx2);font-size:13px;margin-bottom:26px">Cada etapa aumenta R$10–20 no threshold para não chocar a conversão. Monitorar taxa de abandono de carrinho (alerta se > +3pp vs semana anterior). Metas Prime acumulativas.</p>
-
+  <p style="color:var(--tx2);font-size:13px;margin-bottom:24px">Cada etapa aumenta R$10–20 no threshold para não impactar a conversão. Monitorar taxa de abandono de carrinho — alertar se subir mais de 3pp vs semana anterior. Metas Prime acumulativas por fase.</p>
   <div class="timeline">
 
-    <!-- HOJE -->
     <div class="tl-item">
-      <div class="tl-dot warn" style="border-color:var(--err);color:var(--err)">HOJE</div>
+      <div class="tl-dot urgent" style="border-color:var(--err);color:var(--err)">HOJE</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--err)">STATUS ATUAL</span>
-          <span class="tl-title">Situação a corrigir</span>
-          <span class="tl-threshold">PAC: ~R$199 | SEDEX: ~R$249</span>
-        </div>
-        <div class="tl-body">Subsídio real de R$456.914/mês. 67,4% dos pedidos com frete grátis. Nordeste/Norte com 89% FG e custo médio R$64–72/obj. Prime: 65 assinaturas, R$23.328/mês de cobertura.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio: <strong style="color:var(--err)">−R$456.914/mês</strong></div>
-          <div class="tl-met">Cobertura: <strong>23,8%</strong></div>
-          <div class="tl-met">FG%: <strong>67,4%</strong></div>
-          <div class="tl-met">Prime: <strong>65 ass</strong></div>
-        </div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--err)">STATUS ATUAL</span><span class="tl-title">Situação a corrigir</span><span class="tl-threshold">PAC: ~R$199 | SEDEX: ~R$249</span></div>
+        <div class="tl-body">Subsídio real de R$456.914/mês. 67,4% dos pedidos com frete grátis. NE/Norte com 89% FG e custo médio R$64–72/obj. Prime: 65 assinaturas, R$23.328/mês.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--err)">−R$456.914/mês</strong></div><div class="tl-met">Cobertura: <strong>23,8%</strong></div><div class="tl-met">FG%: <strong>67,4%</strong></div><div class="tl-met">Prime: <strong>65 ass</strong></div></div>
       </div>
     </div>
 
-    <!-- DIA 7 -->
     <div class="tl-item">
       <div class="tl-dot urgent">D-7</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--err)">DIA 7 — URGENTE</span>
-          <span class="tl-title">Regra Regional NE + Norte (maior impacto isolado)</span>
-          <span class="tl-threshold">NE: PAC≥R$299 / SEDEX≥R$449 | Norte: PAC≥R$349 / SEDEX fora</span>
-        </div>
-        <div class="tl-body">Apenas uma configuração no VTEX por região. Não altera nada para Sul/Sudeste/CO — zero risco de conversão no core. Nordeste+Norte têm custo médio R$64–96/obj com 89% FG e resultado%GMV de −17 a −18%. Esta é a ação de maior retorno por menor risco.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--warn)">−R$321.976/mês</strong></div>
-          <div class="tl-met">Economia: <strong style="color:var(--ok)">+R$134.938/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$1,62M</strong></div>
-        </div>
-        <div class="tl-impact">↑ Prime: manter 65-72 ass (retenção ativa, não deixar cancelar)</div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--err)">DIA 7 — URGENTE</span><span class="tl-title">Regra Regional NE + Norte — Maior ROI isolado</span><span class="tl-threshold">NE: PAC≥R$299 / SEDEX≥R$449 | Norte: PAC≥R$349 / SEDEX off</span></div>
+        <div class="tl-body">Apenas uma configuração no VTEX por região. Não altera Sul/Sudeste/CO — zero risco de conversão no core. NE+Norte: custo médio R$64–96/obj, resultado%GMV de −17 a −18%, 89% frete grátis.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--warn)">−R$321.976/mês</strong></div><div class="tl-met">Economia: <strong style="color:var(--ok)">+R$134.938/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$1,62M</strong></div></div>
+        <div class="tl-impact">↑ Prime: retenção ativa — zero cancelamentos. Meta: manter 65–72 ass.</div>
       </div>
     </div>
 
-    <!-- DIA 14 -->
     <div class="tl-item">
       <div class="tl-dot urgent">D-14</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--err)">DIA 14</span>
-          <span class="tl-title">Threshold site: PAC ≥ R$219 / SEDEX ≥ R$269 (+R$20 no PAC)</span>
-          <span class="tl-threshold">Sul/Sudeste/CO: +R$20 | NE/Norte: mantém regra D-7</span>
-        </div>
-        <div class="tl-body">Primeiro aumento gradual para o mercado geral. Sobe apenas R$20 no threshold — impacto mínimo em conversão. Monitorar por 7 dias antes da próxima etapa. Se abandono de carrinho subir > 3pp, pausar e investigar.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--warn)">−R$264.366/mês</strong></div>
-          <div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$192.548/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$2,31M</strong></div>
-        </div>
-        <div class="tl-impact">↑ Prime: lançar campanha "assine e ganhe frete grátis a partir de R$149" — usar pico de Março como benchmark. Meta: 80 ass.</div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--err)">DIA 14</span><span class="tl-title">Threshold site: PAC ≥ R$219 / SEDEX ≥ R$269 (+R$20)</span><span class="tl-threshold">Sul/Sudeste/CO: +R$20 | NE/Norte: mantém D-7</span></div>
+        <div class="tl-body">Primeiro aumento gradual para o mercado geral. Sobe apenas R$20 — impacto mínimo em conversão. Monitorar por 7 dias. Se abandono subir > 3pp, pausar e investigar antes de continuar.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--warn)">−R$264.366/mês</strong></div><div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$192.548/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$2,31M</strong></div></div>
+        <div class="tl-impact">↑ Prime: lançar campanha "assine e ganhe frete grátis a partir de R$149". Meta: 80 ass.</div>
       </div>
     </div>
 
-    <!-- DIA 21 -->
     <div class="tl-item">
       <div class="tl-dot warn">D-21</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--warn)">DIA 21</span>
-          <span class="tl-title">Threshold site: PAC ≥ R$229 / SEDEX ≥ R$299 (+R$10)</span>
-          <span class="tl-threshold">Incremento conservador — apenas R$10 a mais</span>
-        </div>
-        <div class="tl-body">Segundo incremento. Com a regra NE/Norte já absorvendo o choque maior, este ajuste é cirúrgico. Clientes já acostumados com o novo patamar de R$219. Ajuste de R$10 é praticamente imperceptível psicologicamente.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--warn)">−R$224.338/mês</strong></div>
-          <div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$232.576/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$2,79M</strong></div>
-        </div>
-        <div class="tl-impact">↑ Prime: 90 ass meta. Ativar upsell pós-compra para clientes com frete pago (conversão +40% nesse momento).</div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--warn)">DIA 21</span><span class="tl-title">Threshold site: PAC ≥ R$229 / SEDEX ≥ R$299 (+R$10)</span><span class="tl-threshold">Incremento conservador de R$10</span></div>
+        <div class="tl-body">Segundo incremento. Com NE/Norte já absorvendo o choque maior, este ajuste é cirúrgico. R$10 é praticamente imperceptível psicologicamente — clientes já adaptados ao novo patamar de R$219.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--warn)">−R$224.338/mês</strong></div><div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$232.576/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$2,79M</strong></div></div>
+        <div class="tl-impact">↑ Prime: upsell pós-compra para clientes que pagaram frete (+40% conversão nesse momento). Meta: 90 ass.</div>
       </div>
     </div>
 
-    <!-- DIA 30 -->
     <div class="tl-item">
       <div class="tl-dot warn">D-30</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--warn)">DIA 30 — CHECK POINT</span>
-          <span class="tl-title">Threshold site: PAC ≥ R$239 / SEDEX ≥ R$319 · Revisão de Resultado</span>
-          <span class="tl-threshold">Revisar: abandono carrinho, ticket médio, receita Prime</span>
-        </div>
-        <div class="tl-body">Ponto de checagem de 30 dias. Comparar ticket médio atual vs Maio (base). Se ticket subiu > R$15, o cart-building está funcionando e é seguro continuar. Revisar os 10 estados mais deficitários — CE/MA/PB/RN/RO devem mostrar melhora expressiva.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--warn)">−R$198.017/mês</strong></div>
-          <div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$258.897/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$3,11M</strong></div>
-        </div>
-        <div class="tl-impact">↑ Prime meta: 100 ass · Bundle produto + Prime em live shopping · Replicar o que funcionou em Março.</div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--warn)">DIA 30 — CHECK POINT</span><span class="tl-title">Threshold: PAC ≥ R$239 / SEDEX ≥ R$319 · Revisão de Resultado</span><span class="tl-threshold">Revisar: abandono, ticket médio, receita Prime</span></div>
+        <div class="tl-body">Ponto de checagem. Se ticket médio subiu > R$15 vs Maio, o cart-building está funcionando e é seguro continuar. Revisar os 10 estados mais deficitários — CE/MA/PB/RN/RO devem mostrar melhora expressiva.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--warn)">−R$198.017/mês</strong></div><div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$258.897/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$3,11M</strong></div></div>
+        <div class="tl-impact">↑ Prime: bundle produto + Prime em live. Replicar o que funcionou em Março. Meta: 100 ass.</div>
       </div>
     </div>
 
-    <!-- DIA 45 -->
     <div class="tl-item">
       <div class="tl-dot ok">D-45</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--ok)">DIA 45 — META POLÍTICA</span>
-          <span class="tl-title">★ Threshold final: PAC ≥ R$249 / SEDEX ≥ R$349</span>
-          <span class="tl-threshold">Cenário C+Regional — equilíbrio ótimo confirmado pelos dados</span>
-        </div>
-        <div class="tl-body">Meta de threshold atingida. Incremento total de R$50 em PAC e R$100 em SEDEX, feito em 4 etapas de ~2 semanas. Clientes adaptados gradualmente — impacto em conversão mínimo. Cart-building provavelmente aumentou ticket médio em R$30–45.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--ok)">−R$170.873/mês</strong></div>
-          <div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$286.041/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$3,43M</strong></div>
-        </div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--ok)">DIA 45 — META POLÍTICA ★</span><span class="tl-title">Threshold final: PAC ≥ R$249 / SEDEX ≥ R$349</span><span class="tl-threshold">Cenário C+Regional — equilíbrio ótimo confirmado pelos dados</span></div>
+        <div class="tl-body">Meta de threshold atingida. Incremento total de R$50 em PAC e R$100 em SEDEX, feito em 4 etapas de ~2 semanas. Clientes adaptados gradualmente. Cart-building provavelmente aumentou ticket médio em R$30–45.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--ok)">−R$170.873/mês</strong></div><div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$286.041/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$3,43M</strong></div></div>
         <div class="tl-impact">↑ Prime meta: 115 ass. Apresentar resultado parcial para diretoria — economia já visível no P&L.</div>
       </div>
     </div>
 
-    <!-- DIA 60 -->
     <div class="tl-item">
       <div class="tl-dot ok">D-60</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--ok)">DIA 60</span>
-          <span class="tl-title">Refinamento NE + restrição de peso + auditoria Live</span>
-          <span class="tl-threshold">NE: ajuste fino para CE/MA/PB (sub%GMV > 20%)</span>
-        </div>
-        <div class="tl-body">Com a política principal consolidada, focar nos micro-ajustes: (1) CE/MA/PB/RN com resultado%GMV ainda acima de −20% → revisar se threshold precisa ser R$349 em vez de R$299. (2) Restrição de peso: acima de 5kg para NE/Norte, somente PAC. (3) Implementar tag de canal no VTEX para separar Live dos demais.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--ok)">−R$155.608/mês</strong></div>
-          <div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$301.306/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$3,62M</strong></div>
-        </div>
-        <div class="tl-impact">↑ Prime meta: 130 ass · Integrar Prime com Live Shopping (frete grátis exclusive para assinantes em lives).</div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--ok)">DIA 60</span><span class="tl-title">Refinamento NE + restrição de peso + auditoria Live</span><span class="tl-threshold">NE: ajuste fino CE/MA/PB com resultado%GMV > 20%</span></div>
+        <div class="tl-body">(1) CE/MA/PB/RN: avaliar threshold R$349 em vez de R$299 (sub%GMV ainda acima de 20%). (2) Restrição de peso: acima de 5kg para NE/Norte, somente PAC. (3) Implementar tag de canal no VTEX para separar Live dos demais pedidos.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--ok)">−R$155.608/mês</strong></div><div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$301.306/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$3,62M</strong></div></div>
+        <div class="tl-impact">↑ Prime meta: 130 ass. Prime exclusivo em lives: assinantes com frete grátis a partir de R$149.</div>
       </div>
     </div>
 
-    <!-- DIA 90 -->
     <div class="tl-item">
       <div class="tl-dot target">D-90</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--acc2)">DIA 90 — REVISÃO TRIMESTRAL</span>
-          <span class="tl-title">Consolidado + Prime 160 assinaturas</span>
-          <span class="tl-threshold">PAC R$249 / SEDEX R$349 geral | NE R$299/R$449 | Norte R$349/off</span>
-        </div>
-        <div class="tl-body">Revisão trimestral completa. Política estabilizada. Prime em 160 ass gera R$55.603/mês. Com a combinação de política + Prime, o subsídio mensal deve estar abaixo de R$125k — redução de 73% vs ponto de partida.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--acc2)">−R$123.250/mês</strong></div>
-          <div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$333.664/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$4,00M</strong></div>
-          <div class="tl-met">Prime: <strong style="color:var(--acc4)">160 ass</strong></div>
-        </div>
-        <div class="tl-impact">↑ Apresentar resultado ao board. Definir meta 2027: subsídio < 5% do GMV.</div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--acc2)">DIA 90 — REVISÃO TRIMESTRAL ★</span><span class="tl-title">Consolidado + Prime 160 assinaturas</span><span class="tl-threshold">PAC R$249/SEDEX R$349 geral | NE R$299/R$449 | Norte R$349/off</span></div>
+        <div class="tl-body">Política estabilizada. Prime em 160 ass gera R$55.603/mês. Com política + Prime, o subsídio mensal deve estar abaixo de R$125k — redução de 73% vs ponto de partida. Apresentar resultado ao board.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--acc2)">−R$123.250/mês</strong></div><div class="tl-met">Economia acum: <strong style="color:var(--ok)">+R$333.664/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$4,00M</strong></div><div class="tl-met">Prime: <strong style="color:#a78bfa">160 ass</strong></div></div>
+        <div class="tl-impact">↑ Definir meta 2027: subsídio < 5% do GMV. Monitorar via MiessBrain com alertas automáticos.</div>
       </div>
     </div>
 
-    <!-- DIA 180 -->
     <div class="tl-item">
       <div class="tl-dot target">D-180</div>
       <div class="tl-content">
-        <div class="tl-head">
-          <span class="tl-prazo" style="color:var(--acc2)">DIA 180 — META FINAL</span>
-          <span class="tl-title">★★ Prime 200 assinaturas + Política consolidada</span>
-          <span class="tl-threshold">Cobertura total: 50%+ do custo de frete coberto</span>
-        </div>
-        <div class="tl-body">Meta semestral: subsídio abaixo de R$110k/mês e cobertura total superior a 50%. 200 assinaturas Prime gerando R$69.504/mês. Implementar política de Live com regra diferenciada por região ativa. Painel de monitoramento MiessBrain em produção com alertas automáticos.</div>
-        <div class="tl-metrics">
-          <div class="tl-met">Subsídio estimado: <strong style="color:var(--acc2)">−R$109.349/mês</strong></div>
-          <div class="tl-met">Economia total: <strong style="color:var(--ok)">+R$347.565/mês</strong></div>
-          <div class="tl-met">Anual: <strong style="color:var(--ok)">+R$4,17M</strong></div>
-          <div class="tl-met">Cobertura: <strong style="color:var(--acc2)">50,3%</strong></div>
-        </div>
+        <div class="tl-head"><span class="tl-prazo" style="color:var(--acc2)">DIA 180 — META FINAL ★★</span><span class="tl-title">Prime 200 assinaturas + Política consolidada + Live regra ativa</span><span class="tl-threshold">Cobertura total 81,8% do custo de frete coberto</span></div>
+        <div class="tl-body">200 assinaturas Prime gerando R$69.504/mês. Política de Live com regra diferenciada por região. Painel MiessBrain com alertas automáticos em produção. Subsídio abaixo de R$110k/mês — redução de 76%.</div>
+        <div class="tl-metrics"><div class="tl-met">Subsídio: <strong style="color:var(--acc2)">−R$109.349/mês</strong></div><div class="tl-met">Economia total: <strong style="color:var(--ok)">+R$347.565/mês</strong></div><div class="tl-met">Anual: <strong style="color:var(--ok)">+R$4,17M</strong></div><div class="tl-met">Cobertura: <strong style="color:var(--acc2)">81,8%</strong></div></div>
         <div class="tl-impact">↑ Operação de frete autossustentável. Base para expansão sem crescimento proporcional do subsídio.</div>
       </div>
     </div>
@@ -411,214 +545,117 @@ footer{padding:24px 56px;text-align:center;font-family:var(--m);font-size:9.5px;
 <!-- CENÁRIO COMBINADO -->
 <div class="sec">
   <div class="sl">Simulações Combinadas</div>
-  <h2>Política + Prime: Evolução do Subsídio Mensal</h2>
+  <h2>Política + Prime: Evolução do Subsídio — Visão Completa</h2>
   <div class="tw">
     <table>
-      <thead>
-        <tr>
-          <th>Prazo</th>
-          <th>Threshold PAC / SEDEX</th>
-          <th class="num">Prime (ass)</th>
-          <th class="num">Rec. Assinatura</th>
-          <th class="num">Subsídio/mês</th>
-          <th class="num">Economia/mês</th>
-          <th class="num">Economia/ano</th>
-          <th>Cobertura</th>
-        </tr>
-      </thead>
+      <thead><tr><th>Prazo</th><th>Threshold PAC / SEDEX</th><th class="num">Prime</th><th class="num">Rec. Ass.</th><th class="num">Subsídio/mês</th><th class="num">Economia/mês</th><th class="num">Economia/ano</th><th>Cobertura</th></tr></thead>
       <tbody>
-        <tr>
-          <td>Hoje</td>
-          <td>~R$199 / ~R$249</td>
-          <td class="num">65</td>
-          <td class="num">R$22.589</td>
-          <td class="num err">−R$456.914</td>
-          <td class="num">—</td>
-          <td class="num">—</td>
-          <td><span class="bdg b-err">23,8%</span></td>
-        </tr>
-        <tr>
-          <td>Dia 7</td>
-          <td>NE+Norte regra regional</td>
-          <td class="num">72</td>
-          <td class="num">R$25.021</td>
-          <td class="num err">−R$321.976</td>
-          <td class="num ok">+R$134.938</td>
-          <td class="num ok">+R$1,62M</td>
-          <td><span class="bdg b-warn">46,3%</span></td>
-        </tr>
-        <tr>
-          <td>Dia 14</td>
-          <td>R$219 / R$269 + NE/N</td>
-          <td class="num">80</td>
-          <td class="num">R$27.802</td>
-          <td class="num err">−R$264.366</td>
-          <td class="num ok">+R$192.548</td>
-          <td class="num ok">+R$2,31M</td>
-          <td><span class="bdg b-warn">55,9%</span></td>
-        </tr>
-        <tr>
-          <td>Dia 21</td>
-          <td>R$229 / R$299 + NE/N</td>
-          <td class="num">90</td>
-          <td class="num">R$31.277</td>
-          <td class="num err">−R$224.338</td>
-          <td class="num ok">+R$232.576</td>
-          <td class="num ok">+R$2,79M</td>
-          <td><span class="bdg b-warn">62,6%</span></td>
-        </tr>
-        <tr>
-          <td>Dia 30</td>
-          <td>R$239 / R$319 + NE/N</td>
-          <td class="num">100</td>
-          <td class="num">R$34.752</td>
-          <td class="num err">−R$198.017</td>
-          <td class="num ok">+R$258.897</td>
-          <td class="num ok">+R$3,11M</td>
-          <td><span class="bdg b-warn">66,9%</span></td>
-        </tr>
-        <tr class="hl">
-          <td><strong>Dia 45 ★</strong></td>
-          <td><strong>R$249 / R$349 + NE/N</strong></td>
-          <td class="num">115</td>
-          <td class="num">R$39.965</td>
-          <td class="num err"><strong>−R$170.873</strong></td>
-          <td class="num ok"><strong>+R$286.041</strong></td>
-          <td class="num ok"><strong>+R$3,43M</strong></td>
-          <td><span class="bdg b-ok">71,5%</span></td>
-        </tr>
-        <tr>
-          <td>Dia 60</td>
-          <td>R$249/R$349 + ajuste NE fino</td>
-          <td class="num">130</td>
-          <td class="num">R$45.178</td>
-          <td class="num err">−R$155.608</td>
-          <td class="num ok">+R$301.306</td>
-          <td class="num ok">+R$3,62M</td>
-          <td><span class="bdg b-ok">74,0%</span></td>
-        </tr>
-        <tr class="hl">
-          <td><strong>Dia 90 ★</strong></td>
-          <td><strong>R$249/R$349 consolidado</strong></td>
-          <td class="num">160</td>
-          <td class="num">R$55.603</td>
-          <td class="num ok"><strong>−R$123.250</strong></td>
-          <td class="num ok"><strong>+R$333.664</strong></td>
-          <td class="num ok"><strong>+R$4,00M</strong></td>
-          <td><span class="bdg b-ok">79,4%</span></td>
-        </tr>
-        <tr class="hl2">
-          <td><strong>Dia 180 ★★</strong></td>
-          <td><strong>R$249/R$349 + Live regra</strong></td>
-          <td class="num" style="color:var(--acc4)">200</td>
-          <td class="num" style="color:var(--acc4)">R$69.504</td>
-          <td class="num ok"><strong>−R$109.349</strong></td>
-          <td class="num ok"><strong>+R$347.565</strong></td>
-          <td class="num ok"><strong>+R$4,17M</strong></td>
-          <td><span class="bdg b-ok" style="background:rgba(0,229,195,.15);color:var(--acc2)">81,8%</span></td>
-        </tr>
+        <tr><td>Hoje</td><td>~R$199 / ~R$249</td><td class="num">65</td><td class="num" style="color:#a78bfa">R$22.589</td><td class="num err">−R$456.914</td><td class="num">—</td><td class="num">—</td><td><span class="bdg b-err">23,8%</span></td></tr>
+        <tr><td>Dia 7</td><td>NE/Norte regra regional</td><td class="num">72</td><td class="num" style="color:#a78bfa">R$25.021</td><td class="num err">−R$321.976</td><td class="num ok">+R$134.938</td><td class="num ok">+R$1,62M</td><td><span class="bdg b-warn">46,3%</span></td></tr>
+        <tr><td>Dia 14</td><td>R$219 / R$269 + NE/N</td><td class="num">80</td><td class="num" style="color:#a78bfa">R$27.802</td><td class="num err">−R$264.366</td><td class="num ok">+R$192.548</td><td class="num ok">+R$2,31M</td><td><span class="bdg b-warn">55,9%</span></td></tr>
+        <tr><td>Dia 21</td><td>R$229 / R$299 + NE/N</td><td class="num">90</td><td class="num" style="color:#a78bfa">R$31.277</td><td class="num err">−R$224.338</td><td class="num ok">+R$232.576</td><td class="num ok">+R$2,79M</td><td><span class="bdg b-warn">62,6%</span></td></tr>
+        <tr><td>Dia 30</td><td>R$239 / R$319 + NE/N</td><td class="num">100</td><td class="num" style="color:#a78bfa">R$34.752</td><td class="num err">−R$198.017</td><td class="num ok">+R$258.897</td><td class="num ok">+R$3,11M</td><td><span class="bdg b-warn">66,9%</span></td></tr>
+        <tr class="hl"><td><strong>Dia 45 ★</strong></td><td><strong>R$249 / R$349 + NE/N</strong></td><td class="num">115</td><td class="num" style="color:#a78bfa">R$39.965</td><td class="num err"><strong>−R$170.873</strong></td><td class="num ok"><strong>+R$286.041</strong></td><td class="num ok"><strong>+R$3,43M</strong></td><td><span class="bdg b-ok">71,5%</span></td></tr>
+        <tr><td>Dia 60</td><td>R$249/R$349 + ajuste NE</td><td class="num">130</td><td class="num" style="color:#a78bfa">R$45.178</td><td class="num err">−R$155.608</td><td class="num ok">+R$301.306</td><td class="num ok">+R$3,62M</td><td><span class="bdg b-ok">74,0%</span></td></tr>
+        <tr class="hl"><td><strong>Dia 90 ★</strong></td><td><strong>R$249/R$349 consolidado</strong></td><td class="num">160</td><td class="num" style="color:#a78bfa">R$55.603</td><td class="num ok"><strong>−R$123.250</strong></td><td class="num ok"><strong>+R$333.664</strong></td><td class="num ok"><strong>+R$4,00M</strong></td><td><span class="bdg b-ok">79,4%</span></td></tr>
+        <tr class="hl2"><td><strong>Dia 180 ★★</strong></td><td><strong>R$249/R$349 + Live</strong></td><td class="num" style="color:#a78bfa">200</td><td class="num" style="color:#a78bfa">R$69.504</td><td class="num ok"><strong>−R$109.349</strong></td><td class="num ok"><strong>+R$347.565</strong></td><td class="num ok"><strong>+R$4,17M</strong></td><td><span class="bdg b-ok" style="background:rgba(0,229,195,.15);color:var(--acc2)">81,8%</span></td></tr>
       </tbody>
     </table>
   </div>
-  <p style="font-size:10.5px;color:var(--mu);margin-top:10px;font-family:var(--m)">Cobertura = (Receita Fretes + Receita Prime) ÷ Total Pago Frete · Subsídio = Total Pago − cobertura total · Economia inclui ganho de política + crescimento Prime</p>
+  <p style="font-size:10px;color:var(--mu);margin-top:8px;font-family:var(--m)">Cobertura = (Receita Fretes + Receita Prime) ÷ Total Pago Frete · Subsídio = Total Pago − cobertura · Economia vs situação atual Maio</p>
 </div>
 
-<!-- METAS PRIME -->
-<div class="sec">
-  <div class="sl">Miess Prime — Plano de Crescimento</div>
-  <h2>Meta de Assinaturas: 65 → 200 em 6 Meses</h2>
-  <div class="tc">
-    <div>
-      <h3>Ações por Fase</h3>
-      <div class="hbox pur">
-        <div class="hbox-lbl" style="color:var(--acc4)">FASE 1 (D-0 a D-30): RETENÇÃO · Meta 80-100 ass</div>
-        <div class="hbox-bd">• Zero cancelamentos: identificar assinantes em risco de churn e fazer retenção ativa<br>• Upsell pós-compra: oferecer Prime no checkout para quem pagou frete (conversão estimada 8–12%)<br>• Email/WhatsApp para ex-assinantes: "Volte com R$50 de desconto no primeiro mês"<br>• Cada 10 ass recuperadas = +R$3.475/mês imediato</div>
-      </div>
-      <div class="hbox pur">
-        <div class="hbox-lbl" style="color:var(--acc4)">FASE 2 (D-30 a D-90): AQUISIÇÃO · Meta 100-160 ass</div>
-        <div class="hbox-bd">• Replicar o que funcionou em Março (122 ass) — identificar a campanha<br>• Bundle: "Produto X + Prime 3 meses" em lives e site<br>• Framing: "Com o Prime você paga menos que um frete por mês e tem frete grátis o ano todo"<br>• Meta realista baseada no histórico: Março provou que 122/mês é atingível</div>
-      </div>
-      <div class="hbox pur">
-        <div class="hbox-lbl" style="color:var(--acc4)">FASE 3 (D-90 a D-180): ESCALA · Meta 160-200 ass</div>
-        <div class="hbox-bd">• Prime exclusivo em lives: assinantes têm frete grátis a partir de R$149 em lives (resto R$199)<br>• Programa de indicação: "Indique 1 amiga e ganhe 1 mês grátis"<br>• Presença no checkout de toda compra acima de R$150 com CTA claro de conversão<br>• 200 ass = R$69.504/mês de cobertura — equivale a ~5.100 pedidos com frete cobrado</div>
-      </div>
-    </div>
-    <div>
-      <h3>Impacto Financeiro das Assinaturas</h3>
-      <div class="tw">
-        <table>
-          <thead><tr><th>Ass. Ativas</th><th class="num">Receita/mês</th><th class="num">Add vs hoje</th><th class="num">Cobre fretes</th></tr></thead>
-          <tbody>
-            <tr><td>65 (hoje)</td><td class="num">R$22.589</td><td class="num">—</td><td class="num">3,8%</td></tr>
-            <tr><td>80</td><td class="num">R$27.802</td><td class="num ok">+R$5.213</td><td class="num">4,6%</td></tr>
-            <tr><td>100</td><td class="num">R$34.752</td><td class="num ok">+R$12.163</td><td class="num">5,8%</td></tr>
-            <tr><td>122 (pico Mar)</td><td class="num">R$42.397</td><td class="num ok">+R$19.808</td><td class="num">7,1%</td></tr>
-            <tr><td>130</td><td class="num">R$45.178</td><td class="num ok">+R$22.589</td><td class="num">7,5%</td></tr>
-            <tr class="hl"><td><strong>160</strong></td><td class="num ok"><strong>R$55.603</strong></td><td class="num ok"><strong>+R$33.014</strong></td><td class="num ok"><strong>9,3%</strong></td></tr>
-            <tr class="hl2"><td><strong>200 ★</strong></td><td class="num" style="color:var(--acc4)"><strong>R$69.504</strong></td><td class="num ok"><strong>+R$46.915</strong></td><td class="num" style="color:var(--acc4)"><strong>11,6%</strong></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="hbox grn" style="margin-top:14px">
-        <div class="hbox-lbl" style="color:var(--ok)">FRAMING PARA VENDA DO PRIME</div>
-        <div class="hbox-bd">Ticket médio do assinante Prime: <strong style="color:var(--tx)">R$347/mês</strong>. Uma assinatura cobre em média 10 fretes PAC para o Sudeste ou 4 fretes PAC para o Nordeste. Para o cliente: paga R$347/mês e recebe frete grátis em todas as compras. Para a Miess: cada assinante compra mais vezes porque o custo marginal de comprar é zero.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- POLÍTICA FINAL + DECISÃO -->
+<!-- POLÍTICA FINAL -->
 <div class="sec">
   <div class="sl">Decisão Final</div>
-  <h2>Política Recomendada — Completa</h2>
+  <h2>Política Recomendada — Baseada nos Dados Reais</h2>
   <div class="pol-grid">
     <div class="pol" style="border-top:3px solid var(--pac)">
-      <div class="pol-lbl" style="color:var(--pac)">SITE — PAC GRÁTIS (GERAL)</div>
+      <div class="pol-label" style="color:var(--pac)">SITE — PAC (ECONÔMICO) GRÁTIS</div>
       <div class="pol-val">R$249</div>
-      <div class="pol-note">Sul + Sudeste + CO<br>Nordeste: ≥ R$299<br>Norte: ≥ R$349</div>
+      <div class="pol-note">Sul + Sudeste + CO: ≥ R$249<br>Nordeste: ≥ R$299<br>Norte: ≥ R$349</div>
     </div>
     <div class="pol" style="border-top:3px solid var(--sedex)">
-      <div class="pol-lbl" style="color:var(--sedex)">SITE — SEDEX GRÁTIS (GERAL)</div>
+      <div class="pol-label" style="color:var(--sedex)">SITE — SEDEX (EXPRESSO) GRÁTIS</div>
       <div class="pol-val">R$349</div>
-      <div class="pol-note">Sul + Sudeste + CO<br>Nordeste: ≥ R$449<br>Norte: não oferecer grátis</div>
+      <div class="pol-note">Sul + Sudeste + CO: ≥ R$349<br>Nordeste: ≥ R$449<br>Norte: ≥ R$549 (ou não oferecer)</div>
     </div>
     <div class="pol" style="border-top:3px solid var(--acc3)">
-      <div class="pol-lbl" style="color:var(--acc3)">LIVE — PAC GRÁTIS</div>
+      <div class="pol-label" style="color:var(--acc3)">LIVE — PAC GRÁTIS</div>
       <div class="pol-val">R$149</div>
-      <div class="pol-note">Sul + Sudeste: ≥ R$149<br>CO: ≥ R$199<br>NE/Norte: ≥ R$249</div>
+      <div class="pol-note">Sul + Sudeste: ≥ R$149<br>CO: ≥ R$199<br>Nordeste/Norte: ≥ R$249</div>
     </div>
-    <div class="pol" style="border-top:3px solid var(--acc4)">
-      <div class="pol-lbl" style="color:var(--acc4)">PRIME — PAC GRÁTIS (ASSINANTE)</div>
-      <div class="pol-val">R$149</div>
-      <div class="pol-note">Assinante Prime: PAC grátis ≥ R$149 em todo Brasil<br>SEDEX grátis ≥ R$249 (Sul/Sudeste/CO apenas)</div>
+    <div class="pol" style="border-top:3px solid var(--acc)">
+      <div class="pol-label" style="color:var(--acc)">LIVE — SEDEX GRÁTIS</div>
+      <div class="pol-val">R$249</div>
+      <div class="pol-note">Sul + Sudeste: ≥ R$249<br>CO: ≥ R$299<br>Nordeste/Norte: não oferecer</div>
     </div>
   </div>
 
-  <div class="final-box">
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-bottom:20px">
-      <div>
-        <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">ECONOMIA MENSAL (90 DIAS)</div>
-        <div style="font-size:32px;font-weight:800;color:var(--ok)">R$333.664</div>
-      </div>
-      <div>
-        <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">ECONOMIA ANUAL (PROJETADA)</div>
-        <div style="font-size:32px;font-weight:800;color:var(--ok)">R$4.003.966</div>
-      </div>
-      <div>
-        <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">META PRIME 6 MESES</div>
-        <div style="font-size:32px;font-weight:800;color:var(--acc4)">200 ass</div>
-      </div>
-      <div>
-        <div style="font-family:var(--m);font-size:9px;color:var(--mu);letter-spacing:.1em;margin-bottom:6px">GRAU DE CONFIANÇA</div>
-        <div style="font-size:32px;font-weight:800;color:var(--acc2)">ALTO</div>
-      </div>
-    </div>
-    <div style="font-size:13px;color:var(--tx2);line-height:1.9;border-top:1px solid var(--bdr);padding-top:16px">
-      <strong style="color:var(--tx)">Resumo executivo:</strong> A operação de frete da MIESS tem um custo real de R$456.914/mês, coberto em apenas 23,8% por receita de fretes e Prime. O plano de 180 dias combina: (1) regra regional imediata para NE/Norte — maior ROI de qualquer ação isolada; (2) aumento gradual de threshold em 4 etapas de R$10–20 para não impactar conversão; (3) crescimento do Prime de 65 para 200 assinaturas replicando o pico de Março. O resultado final projeta subsídio de R$109k/mês — redução de 76% — com cobertura total de 81,8%. <strong style="color:var(--acc2)">Baseado em 25.083 pedidos com custo Correios real validado por etiqueta.</strong>
+  <div class="hbox grn">
+    <div class="hbox-lbl" style="color:var(--ok); font-size:13px">ECONOMIA MENSAL ESTIMADA: R$268.894 &nbsp;|&nbsp; ECONOMIA ANUAL: R$3.226.732 &nbsp;|&nbsp; GRAU DE CONFIANÇA: ALTO</div>
+    <div class="hbox-bd" style="font-size:13.5px; line-height:1.9">
+      Baseado em <strong style="color:var(--tx)">25.083 pedidos com custo Correios real faturado</strong> (match exato por etiqueta). Fórmula validada: AD415536856BR → frete cliente R$12,36 − custo Correios R$9,37 = <strong style="color:var(--ok)">ganho R$2,99 ✓</strong><br><br>
+      <strong style="color:var(--tx)">Justificativa do threshold R$249/R$349:</strong> é o ponto exato onde a curva Result%GMV se inverte. Abaixo de R$249, o resultado%GMV fica entre −12% e −17%. Acima de R$400, cai para −8,4%. A faixa R$250–349 com 98–99% de frete grátis e resultado%GMV de −15% é a maior oportunidade imediata de redução de custo.
     </div>
   </div>
 </div>
 
-<footer>Análise Financeira de Frete + Prime v3 · MIESS Moda Íntima · 08/06/2026 · Match: Nr. rastreio KPL ↔ Etiqueta Correios · Dados Prime: Jan–Mai 2026</footer>
+<!-- AÇÕES -->
+<div class="sec">
+  <div class="sl">Plano de Ação</div>
+  <h2>O Que Fazer — Ordenado por Impacto Financeiro</h2>
+  <div class="ac-grid">
+    <div class="ac">
+      <div class="ac-pr err">🔴 URGENTE · 7 DIAS · IMPACTO #1</div>
+      <div class="ac-ti">Regra regional Nordeste: PAC ≥ R$299 / SEDEX ≥ R$449</div>
+      <div class="ac-bd">Nordeste: resultado%GMV de −17,8%, 89% frete grátis, custo médio SEDEX R$89,98. BA, CE, PE, MA, PB são os 5 estados com maior custo absoluto. Criar regra regional no VTEX imediatamente.</div>
+      <div class="ac-imp">↑ Economia estimada: R$120–150k/mês | R$1,44–1,8M/ano</div>
+    </div>
+    <div class="ac">
+      <div class="ac-pr err">🔴 URGENTE · 7 DIAS · IMPACTO #2</div>
+      <div class="ac-ti">Banir SEDEX grátis no Norte abaixo de R$549</div>
+      <div class="ac-bd">Norte: resultado%GMV −17,4%, custo SEDEX RO=R$89, AM/AC/RR≈R$96. 89% frete grátis. Forçar PAC como padrão, SEDEX grátis apenas acima de R$549. Impacto imediato no caixa.</div>
+      <div class="ac-imp">↑ Economia estimada: R$40–55k/mês | R$480–660k/ano</div>
+    </div>
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--warn)">🟡 14 DIAS · IMPACTO #3</div>
+      <div class="ac-ti">Elevar threshold geral: PAC ≥ R$249 / SEDEX ≥ R$349</div>
+      <div class="ac-bd">Faixas R$250–349 com 98–99% FG e resultado −15%. Elevar threshold via teste A/B no VTEX. Monitorar taxa de abandono. Benefício imediato: clientes nessa faixa passam a pagar frete ou adicionam produtos.</div>
+      <div class="ac-imp">↑ Economia estimada: R$253k/mês | R$3,04M/ano</div>
+    </div>
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--warn)">🟡 30 DIAS · IMPACTO #4</div>
+      <div class="ac-ti">Auditar pedidos pesados (>5kg) para NE/Norte via SEDEX</div>
+      <div class="ac-bd">292 objetos >10kg em Maio, custo máximo R$833. Pedido CE R$568 com SEDEX R$834 = resultado −147%. Criar restrição: acima de 5kg para NE/Norte, somente PAC independente do valor do pedido.</div>
+      <div class="ac-imp">↑ Eliminar outliers: R$15–25k/mês</div>
+    </div>
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--sedex)">🔵 60 DIAS · IMPACTO #5</div>
+      <div class="ac-ti">Investigar frete grátis em R$100–199 (resultado −16 a −17%)</div>
+      <div class="ac-bd">3.259 pedidos com resultado%GMV de −16 a −17%. 60–66% têm frete grátis — qual regra está concedendo? Verificar se há cupons, campanhas ou configuração de VTEX concedendo frete grátis abaixo do threshold oficial.</div>
+      <div class="ac-imp">↑ Subsídio nessa faixa: R$77k/mês — revisar critérios</div>
+    </div>
+    <div class="ac">
+      <div class="ac-pr" style="color:var(--sedex)">🔵 90 DIAS · IMPACTO #6</div>
+      <div class="ac-ti">Painel de frete no MiessBrain com alertas automáticos</div>
+      <div class="ac-bd">Integrar match etiqueta×pedido em rotina diária. Alertas: resultado%GMV > −10% em qualquer região, outliers de custo > R$200/envio, % frete grátis > 70% em qualquer faixa abaixo de R$249.</div>
+      <div class="ac-imp">↑ Prevenção de desvios em tempo real</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESUMO EXECUTIVO -->
+<div class="sec">
+  <div class="sl">Resumo Executivo</div>
+  <h2>Para Diretoria</h2>
+  <div style="background:var(--s);border:1px solid var(--bdr);border-radius:10px;padding:26px;font-size:13.5px;line-height:1.95;color:var(--tx2)">
+    <p>A MIESS gastou <strong style="color:var(--err)">R$352.009 em custo líquido de frete em Abril e R$408.840 em Maio</strong> — calculado como diferença exata entre o que o cliente pagou de frete e o que a empresa pagou aos Correios, validado pedido a pedido via número de etiqueta.</p><br>
+    <p>A mudança de política em Maio foi positiva em eficiência: o custo como % do GMV caiu de −8,90% para −7,80%, e o ticket médio cresceu +9%. Mas o custo absoluto aumentou porque o volume cresceu +32,5% e <strong style="color:var(--tx)">mais pedidos passaram a ter frete grátis (+5,6pp, de 61,8% para 67,4%)</strong> — sinal de que o threshold atual ainda está baixo demais.</p><br>
+    <p>Os dois pontos críticos são: <strong style="color:var(--err)">(1) Nordeste+Norte com resultado%GMV de −17 a −18%</strong>, 89% frete grátis e custo SEDEX até R$96/obj; e <strong style="color:var(--err)">(2) faixa R$250–349 com 98–99% frete grátis e resultado%GMV de −15%</strong> — clientes que claramente adicionaram produtos só para não pagar frete. Com a política C+Regional (PAC ≥ R$249 geral, ≥ R$299 Nordeste, ≥ R$349 Norte), a economia estimada é de <strong style="color:var(--acc2)">R$268.894/mês — R$3,23M/ano</strong>, com grau de confiança alto baseado em dados reais faturados.</p>
+  </div>
+</div>
+
+<footer>Análise Financeira de Frete v2 · MIESS Moda Íntima · 08/06/2026 · Match exato: Nr. rastreio KPL ↔ Etiqueta Correios · 25.083 pedidos com custo real</footer>
 </body>
 </html>
